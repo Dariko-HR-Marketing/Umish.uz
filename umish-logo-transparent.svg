@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 130" fill="none">
+  <!-- UMISH Official Logo (Transparent Vector) -->
+  <!-- 1. Geometric Emblem / Monogram -->
+  <g id="emblem">
+    <!-- White Letter "U" with smooth rounded corners -->
+    <path d="M26 46 H54 V84 C54 91.5 60.5 97.5 68 97.5 C75.5 97.5 82 91.5 82 84 V68 L108 90 V99 C108 110.5 98.5 120 86.5 120 H54 C38.5 120 26 107.5 26 92 Z" fill="#FFFFFF"/>
+    
+    <!-- Sky Blue V-Neck Collar / Chevron (Left Wing) -->
+    <path d="M54 22 L98 52 V78 L54 48 Z" fill="#008CE3"/>
+    
+    <!-- Sky Blue V-Neck Collar / Chevron (Right Wing) -->
+    <path d="M98 52 L142 22 V48 L98 78 Z" fill="#007ACC"/>
+    
+    <!-- Royal Blue "M" Right Pillar & Central Angled Notch -->
+    <path d="M98 78 L142 48 V120 H118 V84 L98 100 Z" fill="#0066CC"/>
+  </g>
+
+  <!-- 2. Bold Wordmark "UMISH" -->
+  <g id="wordmark" fill="#FFFFFF">
+    <!-- Letter U -->
+    <path d="M180 46 H200 V88 C200 97.5 206.5 103.5 215 103.5 C223.5 103.5 230 97.5 230 88 V46 H250 V88 C250 106.5 236 118.5 215 118.5 C194 118.5 180 106.5 180 88 Z"/>
+    
+    <!-- Letter M -->
+    <path d="M262 46 H282 L294.5 84 L307 46 H327 V118 H308 V76 L298 106 H291 L281 76 V118 H262 Z"/>
+    
+    <!-- Letter I -->
+    <path d="M340 46 H360 V118 H340 Z"/>
+    
+    <!-- Letter S -->
+    <path d="M372 102.5 L388 99.5 C389.5 105.5 394 108.5 401 108.5 C408 108.5 412 105 412 100.5 C412 96 408 93.5 397.5 91 C381.5 87 374.5 81 374.5 69 C374.5 56.5 385.5 46 401.5 46 C416 46 426.5 55 428 68 L412.5 70.5 C411 64 407 60.5 400.5 60.5 C394.5 60.5 390.5 63.5 390.5 67.5 C390.5 71.5 393.5 73.5 404.5 76 C420.5 79.5 428 86 428 98 C428 111.5 416.5 120 400.5 120 C385 120 374 112 372 102.5 Z"/>
+    
+    <!-- Letter H -->
+    <path d="M440 46 H460 V72 H484 V46 H504 V118 H484 V88 H460 V118 H440 Z"/>
+  </g>
+
+  <!-- 3. Subtitle "PROFESSIONAL UNIFORMS" -->
+  <text x="180" y="134" fill="#0098EA" font-family="'Montserrat', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="3.8">PROFESSIONAL UNIFORMS</text>
+</svg>
