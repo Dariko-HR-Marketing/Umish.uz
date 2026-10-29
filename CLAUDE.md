@@ -9,7 +9,8 @@
 - `index.html` — faqat HTML tuzilmasi
 - `css/style.css` — asosiy dizayn va responsive; `css/cad-tailor.css` — CAD kalkulyator, vedomost, print
 - `js/app.js` — modal, menyu, karusel, chat, forma, til almashtirish
-- `js/cad-engine.js` — `cadState`, GOST hisobi (`calculateGost`), SVG siluet (`renderCadSvg`)
+- `js/cad-engine.js` — `cadState`, GOST hisobi (`calculateGost`), slayderlar
+- `js/cad-render.js` — realistik odam silueti (`renderCadSvg`), mato ro'yxati `CAD_FABRICS` va mato tanlash
 - `js/batch-vedomost.js` — xodimlar jadvali, CSV eksport, A4 print, buyurtma
 - `js/b2b-pricing.js` — partiya narxi (`updateCalc`) va dastlabki ishga tushirish
 - Skriptlar klassik (modulsiz) va `index.html` oxirida shu tartibda ulanadi; `onclick` ishlatadigan funksiyalar global bo'lib qolishi shart.

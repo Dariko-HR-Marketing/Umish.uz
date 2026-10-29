@@ -739,6 +739,15 @@
           </div>
         </div>
 
+        <!-- Mato va rang tanlash -->
+        <div class="cad-fabric-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:.5rem;">
+            <b style="font-size:.9rem; color:var(--tx);">Mato va rang</b>
+            <span id="cadFabricName" style="font-size:.76rem; color:var(--mute); text-align:right;"></span>
+          </div>
+          <div id="cadFabricSwatches" class="cad-swatches" role="group" aria-label="Mato rangini tanlang"></div>
+        </div>
+
         <!-- Ichki bo'limlar: Ustki / Pastki / Maxsus -->
         <div class="cad-nav-sub">
           <button type="button" class="cad-sub-btn is-active" id="subBtnTop" onclick="switchCadSub('top')">Ustki kiyim</button>
@@ -945,8 +954,8 @@
 
           <!-- Kiyim sohasi & mato -->
           <div class="calc-field">
-            <label for="tUniformType" style="font-size:.82rem;font-weight:600;color:var(--mute);">Forma turi & Mato:</label>
-            <select id="tUniformType" onchange="updateTailorCad()" style="min-height:36px;font-size:.85rem;">
+            <label for="tUniformType" style="font-size:.82rem;font-weight:600;color:var(--mute);">Forma turi (andoza):</label>
+            <select id="tUniformType" onchange="onUniformTypeChange()" style="min-height:36px;font-size:.85rem;">
               <option value="iiv_patrol" selected>IIV Patrul-post xizmati (To'q ko'k Rip-Stop)</option>
               <option value="harbiy_dala">Harbiy dala & Maxsus (Pixel Kamuflyaj)</option>
               <option value="sanoat_pro">Sanoat & Zavod to'plami (3M tasmali, moyga chidamli)</option>
@@ -1677,6 +1686,7 @@
      ======================================================== -->
 <script src="js/app.js"></script>
 <script src="js/cad-engine.js"></script>
+<script src="js/cad-render.js"></script>
 <script src="js/batch-vedomost.js"></script>
 <script src="js/b2b-pricing.js"></script>
 </body>
