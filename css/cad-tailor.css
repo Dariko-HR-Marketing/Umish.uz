@@ -1,0 +1,160 @@
+/* ==========================================================================
+   7. SMART TAILOR & SILHOUETTE CAD ENGINE STYLES
+   ========================================================================== */
+.calc-tabs-bar {
+  display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem;
+  background: var(--paper-2); padding: 6px; border-radius: var(--r-lg); border: 1px solid var(--line);
+}
+.calc-tab-btn {
+  flex: 1 1 auto; min-height: 46px; padding: .65rem 1.2rem; border-radius: var(--r);
+  border: 1px solid transparent; background: transparent; color: var(--mute);
+  font-family: var(--f-body); font-size: .88rem; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  cursor: pointer; transition: all .2s ease;
+}
+.calc-tab-btn:hover { color: var(--tx); background: rgba(255, 255, 255, .05); }
+.calc-tab-btn.is-active {
+  background: var(--card); color: var(--blue); border-color: var(--line);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+}
+.calc-tab-btn svg { flex: 0 0 auto; color: currentColor; }
+
+/* 3-Column CAD Workspace */
+.cad-grid {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.45fr) minmax(0, 1.1fr);
+  gap: 1.25rem; align-items: stretch;
+}
+@media (max-width: 1200px) { .cad-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .cad-col-metrics { grid-column: span 2; } }
+@media (max-width: 768px) { .cad-grid { grid-template-columns: 1fr; } .cad-col-metrics { grid-column: span 1; } }
+
+/* Left Column: Sliders & Controls */
+.cad-col-controls {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 1.25rem; display: flex; flex-direction: column; gap: 1.1rem;
+}
+.cad-size-pills { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .4rem; }
+.cad-size-pill {
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 4px;
+  padding: .3rem .6rem; font-family: var(--f-mono); font-size: .76rem; font-weight: 700;
+  color: var(--tx); cursor: pointer; transition: all .16s;
+}
+.cad-size-pill:hover { border-color: var(--blue); color: var(--blue); }
+.cad-size-pill.is-active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+.cad-nav-sub { display: flex; gap: .3rem; background: var(--paper-2); padding: 3px; border-radius: var(--r); }
+.cad-sub-btn {
+  flex: 1; padding: .4rem; font-size: .78rem; font-weight: 700; border-radius: 4px; border: 0;
+  background: transparent; color: var(--mute); cursor: pointer; transition: all .16s;
+}
+.cad-sub-btn.is-active { background: var(--card); color: var(--tx); box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+
+.cad-field-group { display: flex; flex-direction: column; gap: .85rem; }
+.cad-slider-row { display: flex; flex-direction: column; gap: .3rem; }
+.cad-slider-hd { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; }
+.cad-slider-hd span { color: var(--mute); font-weight: 600; }
+.cad-slider-hd b { font-family: var(--f-mono); color: var(--blue); font-size: .88rem; }
+.cad-slider-track { display: flex; align-items: center; gap: .6rem; }
+.cad-slider-track input[type="range"] { flex: 1; accent-color: var(--blue); }
+.cad-slider-track input[type="number"] {
+  width: 62px; min-height: 32px; padding: .2rem .4rem; text-align: center;
+  font-family: var(--f-mono); font-weight: 700; font-size: .82rem;
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 4px;
+}
+
+/* Center Column: Dynamic CAD Viewport */
+.cad-col-viewport {
+  background: #061320; border: 1px solid rgba(56, 189, 248, .28); border-radius: var(--r-lg);
+  padding: 1rem; display: flex; flex-direction: column; gap: .75rem; position: relative; overflow: hidden;
+  box-shadow: 0 16px 40px rgba(6, 19, 32, .4);
+}
+.cad-col-viewport::after {
+  content: ""; position: absolute; inset-inline: 0; top: 0; height: 2px;
+  background: linear-gradient(90deg, #38BDF8, #1773D6, transparent 80%);
+}
+.cad-view-bar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+  padding-bottom: .6rem; border-bottom: 1px solid rgba(255, 255, 255, .1); z-index: 5;
+}
+.cad-view-title { display: flex; align-items: center; gap: .5rem; color: #FFFFFF; font-size: .84rem; font-weight: 700; }
+.cad-view-title .dot { width: 7px; height: 7px; border-radius: 50%; background: #38BDF8; animation: blip 2s infinite; }
+.cad-view-tools { display: flex; gap: .4rem; }
+.cad-vbtn {
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .15);
+  color: #CBD5E1; border-radius: 4px; padding: .28rem .65rem; font-size: .74rem; font-weight: 600;
+  cursor: pointer; transition: all .16s; display: inline-flex; align-items: center; gap: .35rem;
+}
+.cad-vbtn:hover { background: rgba(56, 189, 248, .2); color: #fff; border-color: #38BDF8; }
+.cad-vbtn.is-active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+.cad-canvas-wrap {
+  flex: 1 1 auto; min-height: 440px; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.cad-canvas-wrap svg { max-width: 100%; height: auto; max-height: 520px; display: block; }
+
+/* Right Column: Tailor Metrics & Specifications */
+.cad-col-metrics {
+  background: var(--ink); color: var(--ink-tx); border: 1px solid var(--ink-line-2); border-radius: var(--r-lg);
+  padding: 1.3rem; display: flex; flex-direction: column; gap: 1rem; position: relative;
+}
+.cad-col-metrics::after {
+  content: ""; position: absolute; inset-inline: 0; top: 0; height: 2px;
+  background: linear-gradient(90deg, #33C27A, transparent 75%);
+}
+.cad-gost-badge {
+  background: rgba(51, 194, 122, .12); border: 1px solid rgba(51, 194, 122, .3);
+  padding: .75rem 1rem; border-radius: var(--r); display: flex; align-items: center; justify-content: space-between;
+}
+.cad-gost-val { font-family: var(--f-mono); font-size: 1.35rem; font-weight: 800; color: #33C27A; }
+.cad-gost-desc { font-size: .75rem; color: var(--ink-mute); }
+
+.cad-metric-rows { display: flex; flex-direction: column; gap: .55rem; }
+.cad-metric-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .83rem; color: var(--ink-mute); border-bottom: 1px solid var(--ink-line-2); padding-bottom: .45rem;
+}
+.cad-metric-row b { color: var(--ink-tx); font-family: var(--f-mono); font-weight: 600; }
+
+.cad-fabric-calc {
+  background: rgba(23, 115, 214, .1); border: 1px solid rgba(56, 189, 248, .25);
+  border-radius: var(--r); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .45rem;
+}
+.cad-fabric-title { font-size: .76rem; color: #38BDF8; font-weight: 700; text-transform: uppercase; font-family: var(--f-mono); }
+.cad-fabric-total { font-family: var(--f-mono); font-size: 1.25rem; font-weight: 800; color: #FFFFFF; }
+
+/* Batch Table Styles (Tab 2) */
+.batch-box {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;
+}
+.batch-toolbar {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem;
+  padding-bottom: .85rem; border-bottom: 1px solid var(--line);
+}
+.batch-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--r); border: 1px solid var(--line); }
+.batch-table {
+  width: 100%; border-collapse: collapse; font-size: .82rem; text-align: left;
+}
+.batch-table th {
+  background: var(--paper-2); color: var(--mute); font-family: var(--f-mono); font-size: .7rem;
+  padding: .75rem .65rem; border-bottom: 1px solid var(--line); white-space: nowrap; font-weight: 700; text-transform: uppercase;
+}
+.batch-table td {
+  padding: .65rem .65rem; border-bottom: 1px solid var(--line-2); color: var(--tx); white-space: nowrap;
+}
+.batch-table tr:hover td { background: rgba(56, 189, 248, .05); }
+.batch-badge {
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 3px;
+  padding: 2px 6px; font-family: var(--f-mono); font-weight: 700; font-size: .74rem; color: var(--blue);
+}
+.batch-row-btn {
+  background: transparent; border: 1px solid var(--line); border-radius: 4px;
+  padding: 3px 7px; font-size: .72rem; color: var(--mute); cursor: pointer; transition: all .15s;
+}
+.batch-row-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+@media print {
+  body * { visibility: hidden !important; }
+  #printSheet, #printSheet * { visibility: visible !important; }
+  #printSheet { position: fixed; inset: 0; background: #fff !important; color: #000 !important; padding: 20mm; z-index: 999999; }
+}
