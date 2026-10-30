@@ -170,3 +170,9 @@
 .cad-swatch:hover { transform: scale(1.12); }
 .cad-swatch:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .cad-swatch.is-active { border-color: var(--blue); transform: scale(1.12); box-shadow: inset 0 0 0 2px #fff, 0 0 0 3px rgba(23, 115, 214, .25); }
+
+/* Foto rejim */
+.cad-vbtn:disabled { cursor: not-allowed; }
+.cad-photo-note { font-size: .72rem; color: #94A3B8; line-height: 1.4; }
+.cad-calib-box { font-size: .78rem; color: #E2E8F0; background: rgba(56, 189, 248, .12); border: 1px solid rgba(56, 189, 248, .4); border-radius: 6px; padding: .5rem .7rem; }
+.cad-calib-box code { color: #38BDF8; }

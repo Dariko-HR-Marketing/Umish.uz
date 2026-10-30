@@ -105,6 +105,8 @@ function cadTextureDefs(fab) {
 function renderCadSvg() {
   const svg = document.getElementById('cadSvg');
   if (!svg) return;
+  if (typeof renderCadPhoto === 'function' && renderCadPhoto(svg)) return;
+  svg.setAttribute('viewBox', '0 0 500 700');
 
   const s = cadState;
   const back = s.view === 'back';

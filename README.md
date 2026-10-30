@@ -35,6 +35,8 @@
 Umish.uz/
 ├── assets/
 │   └── umish-logo-transparent.svg   # Rasmiy shaffof UMISH logotipi
+├── docs/
+│   └── MODEL-PHOTOS.md              # Model fotolarini tayyorlash qo'llanmasi
 ├── images/                          # Professional mahsulot fotosuratlari
 │   ├── chef_black_jacket_*.jpg
 │   ├── corporate_office_vest_*.jpg
@@ -49,6 +51,7 @@ Umish.uz/
 │   ├── app.js                       # Modal, menyu, forma, til
 │   ├── cad-engine.js                # GOST hisobi va slayderlar
 │   ├── cad-render.js                # Realistik odam silueti va mato tanlash
+│   ├── cad-photo.js                 # Foto rejim va kalibrovka
 │   ├── batch-vedomost.js            # Xodimlar jadvali, CSV, A4 print
 │   └── b2b-pricing.js               # Partiya narxi
 ├── index.html                       # Asosiy veb-sahifa (HTML tuzilmasi)
