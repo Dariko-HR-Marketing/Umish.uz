@@ -9,7 +9,11 @@ const CAD_PHOTO_REF = { height: 176, chest: 104, waist: 92, hips: 102, shoulder:
 // Har bir rasm uchun ixtiyoriy sozlamalar: top, floor, cx (rasm balandligi/kengligiga nisbatan 0..1)
 // va lm (kalibrovka natijasi: nuqtalar [x, y] nisbatlarda). Kalibrovka: sahifa manzili oxiriga ?calibrate qo'shing.
 const CAD_PHOTOS = {
-  iiv_patrol:     { front: { src: 'images/models/iiv_patrol_front.jpg' },     back: { src: 'images/models/iiv_patrol_back.jpg' } },
+  // Haqiqiy maneken fotosi (kalibrovka qilingan). Orqa tomon fotosi bo'lmasa, chizma rejimi ko'rsatiladi.
+  iiv_patrol:     { front: { src: 'images/iiv_patrol_suit_png_1791916033242.jpg', top: 0.046, floor: 0.956, cx: 0.4997,
+                             lm: { shoulderL: [0.3109, 0.2019], shoulderR: [0.6885, 0.2019], chestL: [0.3878, 0.3056], chestR: [0.6116, 0.3056],
+                                   waistL: [0.4003, 0.428], waistR: [0.5997, 0.428], wristR: [0.6823, 0.507], hem: [0.5, 0.4565], trHem: [0.5, 0.926] } },
+                    back: { src: 'images/models/iiv_patrol_back.jpg' } },
   harbiy_dala:    { front: { src: 'images/models/harbiy_dala_front.jpg' },    back: { src: 'images/models/harbiy_dala_back.jpg' } },
   sanoat_pro:     { front: { src: 'images/models/sanoat_pro_front.jpg' },     back: { src: 'images/models/sanoat_pro_back.jpg' } },
   ofis_kostyum:   { front: { src: 'images/models/ofis_kostyum_front.jpg' },   back: { src: 'images/models/ofis_kostyum_back.jpg' } },

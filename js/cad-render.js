@@ -216,6 +216,8 @@ function renderCadSvg() {
       <pattern id="cadGridPat" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(11,34,56,.05)" stroke-width="1"/></pattern>
       <radialGradient id="floorSh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000" stop-opacity=".38"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
       <linearGradient id="shadeH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".42"/><stop offset=".22" stop-color="#000" stop-opacity=".07"/><stop offset=".5" stop-color="#fff" stop-opacity=".11"/><stop offset=".78" stop-color="#000" stop-opacity=".07"/><stop offset="1" stop-color="#000" stop-opacity=".42"/></linearGradient>
+      <linearGradient id="mqH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#7F858E"/><stop offset=".3" stop-color="#C3C8CF"/><stop offset=".5" stop-color="#E4E7EB"/><stop offset=".72" stop-color="#BDC2C9"/><stop offset="1" stop-color="#7A808A"/></linearGradient>
+      <radialGradient id="mqHead" cx="42%" cy="34%" r="70%"><stop offset="0" stop-color="#F1F3F5"/><stop offset=".55" stop-color="#C9CED5"/><stop offset="1" stop-color="#868C96"/></radialGradient>
       <linearGradient id="skinH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#B58260"/><stop offset=".28" stop-color="#DDB08C"/><stop offset=".5" stop-color="#EBC4A3"/><stop offset=".72" stop-color="#DDB08C"/><stop offset="1" stop-color="#B58260"/></linearGradient>
       <radialGradient id="faceGlow" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#7a4a2c" stop-opacity=".22"/></radialGradient>
       <linearGradient id="leather" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#050506"/><stop offset=".4" stop-color="#2b2d33"/><stop offset=".6" stop-color="#16171a"/><stop offset="1" stop-color="#050506"/></linearGradient>
@@ -310,8 +312,13 @@ function renderCadSvg() {
   // ------------------------------------------------------------------
   // Bo'yin, bosh
   // ------------------------------------------------------------------
-  // Forma "ko'rinmas manekenda" ko'rsatiladi: bosh, bo'yin va qo'llar chizilmaydi
-  g += `<g id="cadHead">`;
+  // Studiya manekeni: yuzsiz mat kulrang bosh va bo'yin
+  const headD = `M ${cx} ${r(headTop)} C ${r(cx + hw * 0.92)} ${r(headTop)} ${r(cx + hw)} ${r(headTop + hH * 0.16)} ${r(cx + hw)} ${r(headTop + hH * 0.42)} C ${r(cx + hw)} ${r(headTop + hH * 0.66)} ${r(cx + hw * 0.66)} ${r(headTop + hH * 0.88)} ${r(cx + hw * 0.30)} ${r(chin - 1)} Q ${cx} ${r(chin + 2)} ${r(cx - hw * 0.30)} ${r(chin - 1)} C ${r(cx - hw * 0.66)} ${r(headTop + hH * 0.88)} ${r(cx - hw)} ${r(headTop + hH * 0.66)} ${r(cx - hw)} ${r(headTop + hH * 0.42)} C ${r(cx - hw)} ${r(headTop + hH * 0.16)} ${r(cx - hw * 0.92)} ${r(headTop)} ${cx} ${r(headTop)} Z`;
+  g += `<g id="cadHead">
+    <path d="M ${r(cx - neckH * 0.92)} ${r(chin - 8)} L ${r(cx - neckH)} ${r(neckB + 12)} L ${r(cx + neckH)} ${r(neckB + 12)} L ${r(cx + neckH * 0.92)} ${r(chin - 8)} Z" fill="url(#mqH)"/>
+    <ellipse cx="${cx}" cy="${r(chin + 6)}" rx="${r(neckH * 0.95)}" ry="8" fill="#000" fill-opacity=".18"/>
+    <path d="${headD}" fill="url(#mqHead)" stroke="#6F757F" stroke-opacity=".5" stroke-width="1"/>
+    <ellipse cx="${r(cx - hw * 0.25)}" cy="${r(headTop + hH * 0.22)}" rx="${r(hw * 0.35)}" ry="${r(hH * 0.12)}" fill="#fff" fill-opacity=".35"/>`;
 
   // Bosh kiyim
   const bandY = headTop + hH * 0.30, capHW = hw * 1.12;
@@ -331,6 +338,16 @@ function renderCadSvg() {
       <path d="M ${r(cx - hw * 1.3)} ${r(headTop + hH * 0.30)} Q ${cx} ${r(headTop + hH * (back ? 0.30 : 0.42))} ${r(cx + hw * 1.3)} ${r(headTop + hH * 0.30)} Q ${cx} ${r(headTop + hH * 0.26)} ${r(cx - hw * 1.3)} ${r(headTop + hH * 0.30)} Z" fill="${hh}" stroke="#8A6A00" stroke-width="1.2"/>`;
   }
   g += `</g>`;
+
+  // Maneken qo'llari (mat kulrang)
+  [-1, 1].forEach(sg => {
+    const a = arms[sg], W = a.c(1), ang = -sg * th * 180 / Math.PI;
+    const hc = [W[0] + a.d[0] * 24, W[1] + a.d[1] * 24];
+    g += `<g transform="rotate(${r(ang)} ${r(hc[0])} ${r(hc[1])})">
+      <ellipse cx="${r(hc[0])}" cy="${r(hc[1])}" rx="12" ry="27" fill="url(#mqH)" stroke="#6F757F" stroke-opacity=".55" stroke-width="1"/>
+      <ellipse cx="${r(hc[0] - sg * 11)}" cy="${r(hc[1] - 5)}" rx="3.4" ry="12" fill="url(#mqH)" stroke="#6F757F" stroke-opacity=".5" stroke-width=".8" transform="rotate(${r(sg * 14)} ${r(hc[0] - sg * 11)} ${r(hc[1] - 5)})"/>
+    </g>`;
+  });
 
   // ------------------------------------------------------------------
   // Yenglar
@@ -394,8 +411,7 @@ function renderCadSvg() {
 
   g += `<g id="cadJacket">${fab(torsoD, { tone: type === 'tibbiyot_xalat' ? 0 : 0 })}`;
   // Yoqaning ichki tomoni (bo'yin teshigi)
-  g += `<ellipse cx="${cx}" cy="${r(neckB - 5)}" rx="${r(neckH + 7)}" ry="9" fill="${cadShade(base, -0.62)}" stroke="${outline}" stroke-width="1"/>`
-    + `<path d="M ${r(cx - neckH - 6)} ${r(neckB - 7)} Q ${cx} ${r(neckB - 19)} ${r(cx + neckH + 6)} ${r(neckB - 7)}" fill="none" stroke="${cadShade(base, -0.25)}" stroke-width="3"/>`;
+  g += `<ellipse cx="${cx}" cy="${r(neckB - 5)}" rx="${r(neckH + 7)}" ry="9" fill="url(#mqH)" stroke="${outline}" stroke-width="1"/>`;
   // Tana burmalari
   g += crease(`M ${r(cx - chH + 4)} ${r(pitY + 28)} Q ${r(cx - chH * 0.5)} ${r(pitY + 40)} ${r(cx - 6)} ${r(pitY + 34)}`, 0.10)
     + crease(`M ${r(cx + chH - 4)} ${r(pitY + 28)} Q ${r(cx + chH * 0.5)} ${r(pitY + 40)} ${r(cx + 6)} ${r(pitY + 34)}`, 0.10)

@@ -16,6 +16,9 @@
 - `js/b2b-pricing.js` — partiya narxi (`updateCalc`) va dastlabki ishga tushirish
 - Skriptlar klassik (modulsiz) va `index.html` oxirida shu tartibda ulanadi; `onclick` ishlatadigan funksiyalar global bo'lib qolishi shart.
 
+## Logotiplar (`assets/`)
+- `umish-logo-transparent.svg` — to'q fon (sarlavha, footer); `umish-logo-light.svg` — och fon; `umish-logo-compact*.svg` — tagline'siz, kichik o'lchamlar uchun (≤540px sarlavha); `umish-icon*.svg`, `favicon.svg`, PNG ikonkalar va `og-image.png`.
+
 ## Qoidalar
 1. **Dizayn:** asosiy ko'k `#1773D6`, to'q `#0B2238`, fon `#F8FAFC`. Logotip (`assets/umish-logo-transparent.svg`) nisbati va joyi buzilmasin.
 2. **CAD:** o'lchovlar GOST 23134-78 asosida, slayderlar sm da, SVG koordinatalari proporsional.
