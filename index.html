@@ -850,6 +850,18 @@
               <input type="number" id="numNeck" min="36" max="52" value="41" oninput="syncTailorInput('Neck', this.value)">
             </div>
           </div>
+
+          <!-- Bilak aylanasi (Kitel yengi) -->
+          <div class="cad-slider-row">
+            <div class="cad-slider-hd">
+              <span>Bilak aylanasi (Kitel)</span>
+              <b id="valWrist">18 sm</b>
+            </div>
+            <div class="cad-slider-track">
+              <input type="range" id="tWrist" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
+              <input type="number" id="numWrist" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
+            </div>
+          </div>
         </div>
 
         <!-- 2. Pastki qism slayderlari -->
@@ -899,6 +911,18 @@
             <div class="cad-slider-track">
               <input type="range" id="tThigh" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
               <input type="number" id="numThigh" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
+            </div>
+          </div>
+
+          <!-- Tizza aylanasi (Shim) -->
+          <div class="cad-slider-row">
+            <div class="cad-slider-hd">
+              <span>Tizza aylanasi (Shim)</span>
+              <b id="valKnee">40 sm</b>
+            </div>
+            <div class="cad-slider-track">
+              <input type="range" id="tKnee" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
+              <input type="number" id="numKnee" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
             </div>
           </div>
 
@@ -987,6 +1011,8 @@
             <button type="button" class="cad-vbtn is-active" id="vbtnFront" onclick="setCadView('front')">Old (Front)</button>
             <button type="button" class="cad-vbtn" id="vbtnBack" onclick="setCadView('back')">Orqa (Back)</button>
             <button type="button" class="cad-vbtn is-active" id="vbtnGuides" onclick="toggleCadGuides()">O'lchovlar</button>
+            <button type="button" class="cad-vbtn is-active" id="vbtnMode" onclick="toggleCadMode()">Foto</button>
+            <button type="button" class="cad-vbtn" id="vbtnCalib" onclick="cadCalibStart()" style="display:none;">Kalibrovka</button>
           </div>
         </div>
 
@@ -995,6 +1021,9 @@
             <!-- Dynamic SVG injected by JS -->
           </svg>
         </div>
+
+        <div id="cadCalibBox" class="cad-calib-box" style="display:none;"></div>
+        <div id="cadPhotoNote" class="cad-photo-note" style="display:none;">Foto rejimida kiyim rangi model fotosiga bog'liq. Mato rangini tanlash uchun «Foto» tugmasini o'chirib, chizma rejimiga o'ting.</div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:.72rem; color:#94A3B8; border-top:1px solid rgba(255,255,255,.08); padding-top:.5rem;">
           <span>GOST 23134-78 Standart masshtabi: 1:10</span>
@@ -1102,10 +1131,12 @@
               <th>Ko'krak (ОГ)</th>
               <th>Bel (ОТ)</th>
               <th>Yeng (ДР)</th>
+              <th>Bilak</th>
               <th>Yelka (ШП)</th>
               <th>Bo'y (Rost)</th>
               <th>Shim (ДБ)</th>
               <th>Shim beli</th>
+              <th>Tizza</th>
               <th>Bosh (Kepi)</th>
               <th>Qon guruhi</th>
               <th>Unvoni</th>
@@ -1699,6 +1730,7 @@
 <script src="js/app.js"></script>
 <script src="js/cad-engine.js"></script>
 <script src="js/cad-render.js"></script>
+<script src="js/cad-photo.js"></script>
 <script src="js/batch-vedomost.js"></script>
 <script src="js/b2b-pricing.js"></script>
 </body>
