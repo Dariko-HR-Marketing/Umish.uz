@@ -167,11 +167,14 @@ function printTailorSheet() {
   printEl.innerHTML = `
     <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; color: #111;">
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px;">
-        <div>
-          <h2 style="margin:0; font-size: 20px; font-weight: bold; text-transform: uppercase;">UMISH — Tikuvchilik & Maxsus Kiyim Fabrikasi</h2>
-          <p style="margin:4px 0 0; font-size: 12px; color: #555;">Individual O'lchov va Texnik Lekal Varaqasi (GOST 23134-78)</p>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <img src="assets/umish-logo-light.png" alt="UMISH" style="height:44px; width:auto; display:block;">
+          <div>
+            <h2 style="margin:0; font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing:.02em;">UMISH — Tikuvchilik & Maxsus Kiyim Fabrikasi</h2>
+            <p style="margin:3px 0 0; font-size: 11px; color: #555;">Individual O'lchov va Texnik Lekal Varaqasi (GOST 23134-78)</p>
+          </div>
         </div>
-        <div style="text-align: right; font-size: 12px;">
+        <div style="text-align: right; font-size: 11px; color: #333;">
           <b>Sana:</b> ${new Date().toLocaleDateString('uz-UZ')}<br>
           <b>Hujjat №:</b> UM-${Date.now().toString().slice(-6)}
         </div>
@@ -292,11 +295,14 @@ function printBatchSheet() {
   printEl.innerHTML = `
     <div style="font-family: Arial, sans-serif; max-width: 1000px; margin: 0 auto; color: #111;">
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 16px;">
-        <div>
-          <h2 style="margin:0; font-size: 18px; font-weight: bold; text-transform: uppercase;">UMISH — Tikuv Buyurtmalari va O'lchov Vedomosti</h2>
-          <p style="margin:4px 0 0; font-size: 11px; color: #555;">Maxsus va harbiy kiyimlar partiyasi o'lchov ro'yxati</p>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <img src="assets/umish-logo-light.png" alt="UMISH" style="height:40px; width:auto; display:block;">
+          <div>
+            <h2 style="margin:0; font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing:.02em;">UMISH — Tikuv Buyurtmalari va O'lchov Vedomosti</h2>
+            <p style="margin:3px 0 0; font-size: 11px; color: #555;">Maxsus va harbiy kiyimlar partiyasi o'lchov ro'yxati (GOST 23134-78)</p>
+          </div>
         </div>
-        <div style="text-align: right; font-size: 11px;">
+        <div style="text-align: right; font-size: 11px; color: #333;">
           <b>Sana:</b> ${new Date().toLocaleDateString('uz-UZ')}<br>
           <b>Jami xodimlar:</b> ${batchEmployees.length} nafar | <b>Jami mato:</b> ${totalFabric.toFixed(1)} metr
         </div>

@@ -16,11 +16,15 @@
 - `js/b2b-pricing.js` — partiya narxi (`updateCalc`) va dastlabki ishga tushirish
 - Skriptlar klassik (modulsiz) va `index.html` oxirida shu tartibda ulanadi; `onclick` ishlatadigan funksiyalar global bo'lib qolishi shart.
 
-## Logotiplar (`assets/`)
-- `umish-logo-transparent.svg` — to'q fon (sarlavha, footer); `umish-logo-light.svg` — och fon; `umish-logo-compact*.svg` — tagline'siz, kichik o'lchamlar uchun (≤540px sarlavha); `umish-icon*.svg`, `favicon.svg`, PNG ikonkalar va `og-image.png`.
-
 ## Qoidalar
-1. **Dizayn:** asosiy ko'k `#1773D6`, to'q `#0B2238`, fon `#F8FAFC`. Logotip (`assets/umish-logo-transparent.svg`) nisbati va joyi buzilmasin.
+1. **Dizayn & Brend:**
+   - Asosiy ko'k `#1773D6`, to'q navy `#0B2238`, fon `#F8FAFC`.
+   - Logotip original va proporsional (aspect-ratio: 720 / 194):
+     - `assets/umish-logo-transparent.svg` / `umish-logo-dark.png`: to'q fonlar (Header, Footer, Modallar) uchun White + Blue shaffof logotip.
+     - `assets/umish-logo-light.png` / `umish-logo-light.svg`: oq/och fonlar va A4 chop etish uchun Navy + Blue logotip.
+     - `assets/umish-monogram-white.png`: kvadrat monografiya ikonkasi (Favicon, Apple touch icon).
+     - `assets/umish-banner-dark.png`: ijtimoiy tarmoqlar (og:image / twitter:image) banneri.
+   - Logotip o'lchamlari va proporsiyalari hech qachon buzilmasin va cho'zilmasin (`object-fit: contain`).
 2. **CAD:** o'lchovlar GOST 23134-78 asosida, slayderlar sm da, SVG koordinatalari proporsional.
 3. **Kod:** mavjud funksiyalarni o'chirma; kichik, aniq o'zgarish kirit; butun faylni qayta yozma.
 4. **Til:** barcha matn va xabarlar toza adabiy o'zbek tilida.
