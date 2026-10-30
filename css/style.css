@@ -250,6 +250,8 @@ dl { margin: 0; }
 
 @media (max-width: 1040px) { .nav, .hdr-act > .btn { display: none; } .burger { display: inline-flex; } .hdr-act { margin-left: auto; } }
 @media (max-width: 540px) { .tel-link span { display: none; } .brand-logo-svg, .brand-logo-img { height: 44px; } }
+/* Juda tor ekranlar (320–360px): sarlavha sig'ishi uchun (qo'ng'iroq tugmasi pastki panelda bor) */
+@media (max-width: 360px) { .tel-link { display: none; } .brand-logo-svg, .brand-logo-img { height: 38px; } .hdr-in { gap: .7rem; } }
 
 /* ==========================================================================
    2. HERO SECTION
