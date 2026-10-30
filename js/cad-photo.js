@@ -4,7 +4,7 @@
 // ==========================================================================
 
 // Model fotosidagi odamning haqiqiy o'lchamlari (sm). Rasm shu o'lchamdagi odamni ko'rsatadi.
-const CAD_PHOTO_REF = { height: 176, chest: 104, waist: 92, hips: 102, shoulder: 48, sleeve: 65, jacketLen: 72, trouserLen: 105, neck: 41, head: 58 };
+const CAD_PHOTO_REF = { height: 176, chest: 104, waist: 92, hips: 102, shoulder: 48, sleeve: 65, jacketLen: 72, trouserLen: 105, neck: 41, head: 58, wrist: 18, knee: 40 };
 
 // Har bir rasm uchun ixtiyoriy sozlamalar: top, floor, cx (rasm balandligi/kengligiga nisbatan 0..1)
 // va lm (kalibrovka natijasi: nuqtalar [x, y] nisbatlarda). Kalibrovka: sahifa manzili oxiriga ?calibrate qo'shing.
@@ -157,6 +157,9 @@ function renderCadPhoto(svg) {
     // Shim uzunligi (o'ng tomonda)
     const xt = midX + hipHalf + 26 * u;
     g += arrow([xt, waR[1]], [xt, trh[1]]) + box(xt + 56 * u, (hipP[1] + trh[1]) / 2, `↕ Shim: ${s.trouserLen}sm`);
+    // Bilak va tizza
+    const kneeP = T([cx, Y(0.286)]);
+    g += box(wr[0] + 70 * u, wr[1] + 18 * u, `○ Bilak: ${s.wrist}sm`) + box(kneeP[0] - hipHalf - 60 * u, kneeP[1], `○ Tizza: ${s.knee}sm`);
     // Bo'yin va bosh
     g += leader([neckP[0] + 14 * u, neckP[1]], [neckP[0] + 60 * u, neckP[1] - 24 * u]) + box(neckP[0] + 112 * u, neckP[1] - 24 * u, `Bo'yin: ${s.neck}sm`);
     g += leader([head[0] + 26 * u, head[1] + 30 * u], [head[0] + 70 * u, head[1] + 12 * u]) + box(head[0] + 124 * u, head[1] + 12 * u, `Bosh: ${s.head}sm`);

@@ -840,6 +840,18 @@
               <input type="number" id="numNeck" min="36" max="52" value="41" oninput="syncTailorInput('Neck', this.value)">
             </div>
           </div>
+
+          <!-- Bilak aylanasi (Kitel yengi) -->
+          <div class="cad-slider-row">
+            <div class="cad-slider-hd">
+              <span>Bilak aylanasi (Kitel)</span>
+              <b id="valWrist">18 sm</b>
+            </div>
+            <div class="cad-slider-track">
+              <input type="range" id="tWrist" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
+              <input type="number" id="numWrist" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
+            </div>
+          </div>
         </div>
 
         <!-- 2. Pastki qism slayderlari -->
@@ -889,6 +901,18 @@
             <div class="cad-slider-track">
               <input type="range" id="tThigh" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
               <input type="number" id="numThigh" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
+            </div>
+          </div>
+
+          <!-- Tizza aylanasi (Shim) -->
+          <div class="cad-slider-row">
+            <div class="cad-slider-hd">
+              <span>Tizza aylanasi (Shim)</span>
+              <b id="valKnee">40 sm</b>
+            </div>
+            <div class="cad-slider-track">
+              <input type="range" id="tKnee" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
+              <input type="number" id="numKnee" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
             </div>
           </div>
 
@@ -1097,10 +1121,12 @@
               <th>Ko'krak (ОГ)</th>
               <th>Bel (ОТ)</th>
               <th>Yeng (ДР)</th>
+              <th>Bilak</th>
               <th>Yelka (ШП)</th>
               <th>Bo'y (Rost)</th>
               <th>Shim (ДБ)</th>
               <th>Shim beli</th>
+              <th>Tizza</th>
               <th>Bosh (Kepi)</th>
               <th>Qon guruhi</th>
               <th>Unvoni</th>

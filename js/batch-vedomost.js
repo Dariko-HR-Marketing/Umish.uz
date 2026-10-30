@@ -19,10 +19,12 @@ function renderBatchTable() {
         <td>${emp.chest} sm</td>
         <td>${emp.waist} sm</td>
         <td>${emp.sleeve} sm</td>
+        <td>${emp.wrist || 18} sm</td>
         <td>${emp.shoulder} sm</td>
         <td>${emp.height} sm</td>
         <td>${emp.trouserLen} sm</td>
         <td>${emp.trouserWaist} sm</td>
+        <td>${emp.knee || 40} sm</td>
         <td>${emp.head} sm</td>
         <td><span style="color:#EF4444; font-weight:700;">${emp.blood}</span></td>
         <td><span style="color:#F59E0B; font-weight:600;">${emp.rank}</span></td>
@@ -69,6 +71,8 @@ function loadBatchToCad(idx) {
   cadState.trouserLen = emp.trouserLen;
   cadState.trouserWaist = emp.trouserWaist;
   cadState.head = emp.head;
+  cadState.wrist = emp.wrist || 18;
+  cadState.knee = emp.knee || 40;
   cadState.bloodGroup = emp.blood;
   cadState.rank = emp.rank;
 
@@ -81,6 +85,8 @@ function loadBatchToCad(idx) {
   syncTailorInput('TrouserLen', emp.trouserLen);
   syncTailorInput('TrouserWaist', emp.trouserWaist);
   syncTailorInput('Head', emp.head);
+  syncTailorInput('Wrist', emp.wrist || 18);
+  syncTailorInput('Knee', emp.knee || 40);
 
   const bloodEl = document.getElementById('tBloodGroup');
   if (bloodEl) bloodEl.value = emp.blood;
@@ -113,6 +119,8 @@ function addCurrentToBatch() {
     trouserLen: cadState.trouserLen,
     trouserWaist: cadState.trouserWaist,
     head: cadState.head,
+    wrist: cadState.wrist,
+    knee: cadState.knee,
     blood: cadState.bloodGroup,
     rank: cadState.rank,
     date: new Date().toISOString().split('T')[0]
@@ -132,11 +140,11 @@ function openAddBatchModal() {
 // --- CSV Export with UTF-8 BOM ---
 function exportBatchCSV() {
   let csv = '\uFEFF'; // UTF-8 BOM for Excel compatibility
-  csv += '№;Ism Familiya;Ko\'krak (sm);Bel (sm);Yeng (sm);Yelka (sm);Bo\'y (sm);Shim uzunligi (sm);Shim beli (sm);Bosh (sm);Qon guruhi;Unvoni;Razmer / Rost;Mato sarfi (metr)\r\n';
+  csv += '№;Ism Familiya;Ko\'krak (sm);Bel (sm);Yeng (sm);Bilak (sm);Yelka (sm);Bo\'y (sm);Shim uzunligi (sm);Shim beli (sm);Tizza (sm);Bosh (sm);Qon guruhi;Unvoni;Razmer / Rost;Mato sarfi (metr)\r\n';
 
   batchEmployees.forEach((emp, i) => {
     const calc = calculateGost(emp.height, emp.chest, emp.waist);
-    csv += `${i + 1};"${emp.name}";${emp.chest};${emp.waist};${emp.sleeve};${emp.shoulder};${emp.height};${emp.trouserLen};${emp.trouserWaist};${emp.head};"${emp.blood}";"${emp.rank}";"${calc.size}/${calc.rost}";${calc.fabricMeter}\r\n`;
+    csv += `${i + 1};"${emp.name}";${emp.chest};${emp.waist};${emp.sleeve};${emp.wrist || 18};${emp.shoulder};${emp.height};${emp.trouserLen};${emp.trouserWaist};${emp.knee || 40};${emp.head};"${emp.blood}";"${emp.rank}";"${calc.size}/${calc.rost}";${calc.fabricMeter}\r\n`;
   });
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -229,6 +237,12 @@ function printTailorSheet() {
             <td style="border:1px solid #ccc; padding:6px;">Shim poyasi kengligi</td>
             <td style="border:1px solid #ccc; padding:6px; text-align:center; font-weight:bold;">${cadState.trouserBottom} sm</td>
           </tr>
+          <tr>
+            <td style="border:1px solid #ccc; padding:6px;">Bilak aylanasi (kitel)</td>
+            <td style="border:1px solid #ccc; padding:6px; text-align:center; font-weight:bold;">${cadState.wrist} sm</td>
+            <td style="border:1px solid #ccc; padding:6px;">Tizza aylanasi (shim)</td>
+            <td style="border:1px solid #ccc; padding:6px; text-align:center; font-weight:bold;">${cadState.knee} sm</td>
+          </tr>
         </tbody>
       </table>
 
@@ -260,10 +274,12 @@ function printBatchSheet() {
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.chest}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.waist}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.sleeve}</td>
+        <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.wrist || 18}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.shoulder}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.height}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.trouserLen}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.trouserWaist}</td>
+        <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.knee || 40}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.head}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.blood}</td>
         <td style="border:1px solid #ccc; padding:5px; text-align:center;">${emp.rank}</td>
@@ -294,10 +310,12 @@ function printBatchSheet() {
             <th style="border:1px solid #ccc; padding:5px;">Ko'krak</th>
             <th style="border:1px solid #ccc; padding:5px;">Bel</th>
             <th style="border:1px solid #ccc; padding:5px;">Yeng</th>
+            <th style="border:1px solid #ccc; padding:5px;">Bilak</th>
             <th style="border:1px solid #ccc; padding:5px;">Yelka</th>
             <th style="border:1px solid #ccc; padding:5px;">Bo'y</th>
             <th style="border:1px solid #ccc; padding:5px;">Shim</th>
             <th style="border:1px solid #ccc; padding:5px;">Shim beli</th>
+            <th style="border:1px solid #ccc; padding:5px;">Tizza</th>
             <th style="border:1px solid #ccc; padding:5px;">Bosh</th>
             <th style="border:1px solid #ccc; padding:5px;">Qon</th>
             <th style="border:1px solid #ccc; padding:5px;">Unvoni</th>
@@ -333,7 +351,7 @@ function submitTailorOrder() {
   }
   const commentEl = document.getElementById('leadComment');
   if (commentEl) {
-    commentEl.value = `O'lchov parametrlari:\nRazmer/Rost: ${calc.size}/${calc.rost}\nBo'y: ${cadState.height}sm, Ko'krak: ${cadState.chest}sm, Bel: ${cadState.waist}sm, Yelka: ${cadState.shoulder}sm, Yeng: ${cadState.sleeve}sm, Shim: ${cadState.trouserLen}sm, Beli: ${cadState.trouserWaist}sm, Bosh: ${cadState.head}sm, Qon guruhi: ${cadState.bloodGroup}, Unvon: ${cadState.rank}`;
+    commentEl.value = `O'lchov parametrlari:\nRazmer/Rost: ${calc.size}/${calc.rost}\nBo'y: ${cadState.height}sm, Ko'krak: ${cadState.chest}sm, Bel: ${cadState.waist}sm, Yelka: ${cadState.shoulder}sm, Yeng: ${cadState.sleeve}sm, Bilak: ${cadState.wrist}sm, Shim: ${cadState.trouserLen}sm, Beli: ${cadState.trouserWaist}sm, Tizza: ${cadState.knee}sm, Bosh: ${cadState.head}sm, Qon guruhi: ${cadState.bloodGroup}, Unvon: ${cadState.rank}`;
   }
   if (modal) modal.showModal();
 }

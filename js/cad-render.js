@@ -155,7 +155,7 @@ function renderCadSvg() {
   const st = [
     { y: crotchY, c: c0, hw: hw0 },
     { y: crotchY + span * 0.32, c: c0 * 0.97, hw: hw0 * thS * 0.98 },
-    { y: crotchY + span * 0.55, c: c0 * 0.92, hw: hw0 * 0.84 * Math.sqrt(thS) },
+    { y: crotchY + span * 0.55, c: c0 * 0.92, hw: 20.3 * s.knee / 40 },
     { y: crotchY + span * 0.78, c: c0 * 0.90, hw: hemHW + 1.5 },
     { y: trHem, c: c0 * 0.89, hw: hemHW }
   ];
@@ -177,7 +177,7 @@ function renderCadSvg() {
     const J = [cx + sg * (shH - 21), shY + 14];
     const d = [sg * Math.sin(th), Math.cos(th)];
     const n = [sg * Math.cos(th), -Math.sin(th)];
-    const hws = t => (t < 0.5 ? 20 + (17.5 - 20) * t / 0.5 : 17.5 + (14.5 - 17.5) * (t - 0.5) / 0.5) + (s.chest - 104) * 0.05;
+    const hws = t => (t < 0.5 ? 20 + (17.5 - 20) * t / 0.5 : 17.5 + (14.5 * s.wrist / 18 - 17.5) * (t - 0.5) / 0.5) + (s.chest - 104) * 0.05;
     const pt = (t, side) => [J[0] + d[0] * t * armL + n[0] * hws(t) * side, J[1] + d[1] * t * armL + n[1] * hws(t) * side];
     return { J, d, n, hws, o: t => pt(t, 1), i: t => pt(t, -1), c: t => pt(t, 0) };
   };
@@ -189,7 +189,7 @@ function renderCadSvg() {
   const fab = (d, o = {}) => {
     let out = `<path d="${d}" fill="${base}"/><path d="${d}" fill="url(#fabTex)"/>`;
     if (o.tone) out += `<path d="${d}" fill="${o.tone < 0 ? '#000' : '#fff'}" fill-opacity="${Math.abs(o.tone)}"/>`;
-    if (!o.flat) out += `<path d="${d}" fill="url(#shadeH)"/>`;
+    if (!o.flat) out += `<path d="${d}" fill="url(#shadeH)"/><path d="${d}" fill="url(#vol)"/>`;
     out += `<path d="${d}" fill="none" stroke="${outline}" stroke-width="${o.sw || 1.3}" stroke-linejoin="round"/>`;
     return out;
   };
@@ -212,21 +212,22 @@ function renderCadSvg() {
   // ------------------------------------------------------------------
   let g = `
     <defs>
-      <radialGradient id="bgGlow" cx="50%" cy="46%" r="70%"><stop offset="0" stop-color="#16405f"/><stop offset="1" stop-color="#061320"/></radialGradient>
-      <pattern id="cadGridPat" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(56,189,248,.07)" stroke-width="1"/></pattern>
-      <radialGradient id="floorSh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+      <radialGradient id="bgGlow" cx="50%" cy="46%" r="70%"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#C5D0DC"/></radialGradient>
+      <pattern id="cadGridPat" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(11,34,56,.05)" stroke-width="1"/></pattern>
+      <radialGradient id="floorSh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000" stop-opacity=".38"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
       <linearGradient id="shadeH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".42"/><stop offset=".22" stop-color="#000" stop-opacity=".07"/><stop offset=".5" stop-color="#fff" stop-opacity=".11"/><stop offset=".78" stop-color="#000" stop-opacity=".07"/><stop offset="1" stop-color="#000" stop-opacity=".42"/></linearGradient>
       <linearGradient id="skinH" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#B58260"/><stop offset=".28" stop-color="#DDB08C"/><stop offset=".5" stop-color="#EBC4A3"/><stop offset=".72" stop-color="#DDB08C"/><stop offset="1" stop-color="#B58260"/></linearGradient>
       <radialGradient id="faceGlow" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#7a4a2c" stop-opacity=".22"/></radialGradient>
       <linearGradient id="leather" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#050506"/><stop offset=".4" stop-color="#2b2d33"/><stop offset=".6" stop-color="#16171a"/><stop offset="1" stop-color="#050506"/></linearGradient>
-      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#38BDF8"/></marker>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#1773D6"/></marker>
+      <radialGradient id="vol" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></radialGradient>
       ${cadTextureDefs(fabric)}
     </defs>
     <rect width="100%" height="100%" fill="url(#bgGlow)"/>
     <rect width="100%" height="100%" fill="url(#cadGridPat)"/>
-    <line x1="${cx}" y1="14" x2="${cx}" y2="${floor}" stroke="rgba(56,189,248,.18)" stroke-dasharray="6,4" stroke-width="1"/>
+    <line x1="${cx}" y1="14" x2="${cx}" y2="${floor}" stroke="rgba(11,34,56,.10)" stroke-dasharray="6,4" stroke-width="1"/>
     <ellipse cx="${cx}" cy="${floor + 1}" rx="${r(hiTr * 2.6)}" ry="11" fill="url(#floorSh)"/>
-    <line x1="30" y1="${floor + 1}" x2="470" y2="${floor + 1}" stroke="rgba(56,189,248,.25)" stroke-width="1"/>
+    <line x1="30" y1="${floor + 1}" x2="470" y2="${floor + 1}" stroke="rgba(11,34,56,.20)" stroke-width="1"/>
   `;
 
   // ------------------------------------------------------------------
@@ -309,31 +310,8 @@ function renderCadSvg() {
   // ------------------------------------------------------------------
   // Bo'yin, bosh
   // ------------------------------------------------------------------
-  g += `<g id="cadHead">
-    <path d="M ${r(cx - neckH * 0.92)} ${r(chin - 8)} L ${r(cx - neckH)} ${r(neckB + 12)} L ${r(cx + neckH)} ${r(neckB + 12)} L ${r(cx + neckH * 0.92)} ${r(chin - 8)} Z" fill="url(#skinH)"/>
-    <ellipse cx="${cx}" cy="${r(chin + 6)}" rx="${r(neckH * 0.95)}" ry="8" fill="#000" fill-opacity=".20"/>
-    <ellipse cx="${r(cx - hw * 1.0)}" cy="${r(headTop + hH * 0.5)}" rx="4" ry="9" fill="#D3A27E"/>
-    <ellipse cx="${r(cx + hw * 1.0)}" cy="${r(headTop + hH * 0.5)}" rx="4" ry="9" fill="#D3A27E"/>`;
-
-  const headD = `M ${cx} ${r(headTop)} C ${r(cx + hw * 0.92)} ${r(headTop)} ${r(cx + hw)} ${r(headTop + hH * 0.16)} ${r(cx + hw)} ${r(headTop + hH * 0.42)} C ${r(cx + hw)} ${r(headTop + hH * 0.66)} ${r(cx + hw * 0.66)} ${r(headTop + hH * 0.88)} ${r(cx + hw * 0.30)} ${r(chin - 1)} Q ${cx} ${r(chin + 2)} ${r(cx - hw * 0.30)} ${r(chin - 1)} C ${r(cx - hw * 0.66)} ${r(headTop + hH * 0.88)} ${r(cx - hw)} ${r(headTop + hH * 0.66)} ${r(cx - hw)} ${r(headTop + hH * 0.42)} C ${r(cx - hw)} ${r(headTop + hH * 0.16)} ${r(cx - hw * 0.92)} ${r(headTop)} ${cx} ${r(headTop)} Z`;
-  g += `<path d="${headD}" fill="url(#skinH)"/><path d="${headD}" fill="url(#faceGlow)"/>`;
-
-  if (!back) {
-    const ey = headTop + hH * 0.46, ex = hw * 0.40;
-    [-1, 1].forEach(sg => {
-      const x = cx + sg * ex;
-      g += `<ellipse cx="${r(x)}" cy="${r(ey)}" rx="${r(hw * 0.16)}" ry="2.4" fill="#F7F3EE"/>
-        <circle cx="${r(x)}" cy="${r(ey)}" r="1.9" fill="#3A281C"/><circle cx="${r(x + 0.6)}" cy="${r(ey - 0.6)}" r=".6" fill="#fff"/>
-        <path d="M ${r(x - 6)} ${r(ey - 6)} Q ${r(x)} ${r(ey - 8.5)} ${r(x + 6)} ${r(ey - 6)}" fill="none" stroke="${hairCol}" stroke-width="1.7" stroke-linecap="round"/>`;
-    });
-    g += `<path d="M ${cx} ${r(headTop + hH * 0.50)} L ${r(cx - 1.8)} ${r(headTop + hH * 0.66)} Q ${cx} ${r(headTop + hH * 0.69)} ${r(cx + 2.8)} ${r(headTop + hH * 0.66)}" fill="none" stroke="#A8714F" stroke-opacity=".65" stroke-width="1.2" stroke-linecap="round"/>
-      <path d="M ${r(cx - hw * 0.22)} ${r(headTop + hH * 0.80)} Q ${cx} ${r(headTop + hH * 0.84)} ${r(cx + hw * 0.22)} ${r(headTop + hH * 0.80)}" fill="none" stroke="#98574A" stroke-width="1.5" stroke-linecap="round"/>`;
-    // Soch (old)
-    g += `<path d="M ${r(cx - hw * 1.03)} ${r(headTop + hH * 0.40)} C ${r(cx - hw * 1.12)} ${r(headTop - 7)} ${r(cx + hw * 1.12)} ${r(headTop - 7)} ${r(cx + hw * 1.03)} ${r(headTop + hH * 0.40)} C ${r(cx + hw * 0.95)} ${r(headTop + hH * 0.22)} ${r(cx + hw * 0.6)} ${r(headTop + hH * 0.15)} ${cx} ${r(headTop + hH * 0.14)} C ${r(cx - hw * 0.6)} ${r(headTop + hH * 0.15)} ${r(cx - hw * 0.95)} ${r(headTop + hH * 0.22)} ${r(cx - hw * 1.03)} ${r(headTop + hH * 0.40)} Z" fill="${hairCol}"/>`;
-  } else {
-    // Soch (orqa)
-    g += `<path d="M ${r(cx - hw * 1.03)} ${r(headTop + hH * 0.62)} C ${r(cx - hw * 1.14)} ${r(headTop - 7)} ${r(cx + hw * 1.14)} ${r(headTop - 7)} ${r(cx + hw * 1.03)} ${r(headTop + hH * 0.62)} Q ${r(cx + hw * 0.7)} ${r(headTop + hH * 0.80)} ${cx} ${r(headTop + hH * 0.76)} Q ${r(cx - hw * 0.7)} ${r(headTop + hH * 0.80)} ${r(cx - hw * 1.03)} ${r(headTop + hH * 0.62)} Z" fill="${hairCol}"/>`;
-  }
+  // Forma "ko'rinmas manekenda" ko'rsatiladi: bosh, bo'yin va qo'llar chizilmaydi
+  g += `<g id="cadHead">`;
 
   // Bosh kiyim
   const bandY = headTop + hH * 0.30, capHW = hw * 1.12;
@@ -355,18 +333,8 @@ function renderCadSvg() {
   g += `</g>`;
 
   // ------------------------------------------------------------------
-  // Qo'llar (kaft) va yenglar
+  // Yenglar
   // ------------------------------------------------------------------
-  [-1, 1].forEach(sg => {
-    const a = arms[sg], W = a.c(1), ang = -sg * th * 180 / Math.PI;
-    const hc = [W[0] + a.d[0] * 24, W[1] + a.d[1] * 24];
-    g += `<g transform="rotate(${r(ang)} ${r(hc[0])} ${r(hc[1])})">
-      <ellipse cx="${r(hc[0])}" cy="${r(hc[1])}" rx="12.5" ry="27" fill="url(#skinH)" stroke="#9C6B4B" stroke-opacity=".5" stroke-width="1"/>
-      <ellipse cx="${r(hc[0] - sg * 12)}" cy="${r(hc[1] - 4)}" rx="3.6" ry="13" fill="#DDB08C" stroke="#9C6B4B" stroke-opacity=".5" stroke-width=".8" transform="rotate(${r(sg * 14)} ${r(hc[0] - sg * 12)} ${r(hc[1] - 4)})"/>
-      <path d="M ${r(hc[0] - 6)} ${r(hc[1] + 12)} L ${r(hc[0] - 6)} ${r(hc[1] + 26)} M ${r(hc[0])} ${r(hc[1] + 14)} L ${r(hc[0])} ${r(hc[1] + 27)} M ${r(hc[0] + 6)} ${r(hc[1] + 12)} L ${r(hc[0] + 6)} ${r(hc[1] + 26)}" stroke="#9C6B4B" stroke-opacity=".5" stroke-width=".9"/>
-    </g>`;
-  });
-
   [-1, 1].forEach(sg => {
     const a = arms[sg];
     const S = [cx + sg * shH, shY + 3];
@@ -383,6 +351,11 @@ function renderCadSvg() {
       g += seam(M(o9) + L(i9), { dash: '2.5 2' });
     } else {
       g += fab(`${M(o9)}${L(o1)}${L(i1)}${L(i9)} Z`, { tone: -0.18, sw: 1 }) + button(...(() => { const c = a.c(0.96); return [c[0], c[1]]; })(), military ? gold : '#B8BEC6');
+    }
+    // Manjet teshigi (ichki qism ko'rinadi)
+    {
+      const c1 = a.c(1), ang = Math.atan2(o1[1] - i1[1], o1[0] - i1[0]) * 180 / Math.PI;
+      g += `<ellipse cx="${r(c1[0])}" cy="${r(c1[1])}" rx="${r(Math.hypot(o1[0] - i1[0], o1[1] - i1[1]) / 2)}" ry="3.4" fill="${cadShade(base, -0.62)}" stroke="${outline}" stroke-width="1" transform="rotate(${r(ang)} ${r(c1[0])} ${r(c1[1])})"/>`;
     }
     // Chok chiziqlari
     g += seam(M(a.o(0.05)) + cadCurve([a.o(0.05), a.o(0.5), a.o(0.9)]));
@@ -420,6 +393,9 @@ function renderCadSvg() {
     + ` C ${r(cx + shH * 0.85)} ${r(shY - 3)} ${r(cx + shH * 0.55)} ${r(neckB - 6)} ${r(nR[0])} ${r(nR[1])} Q ${cx} ${r(neckB + 6)} ${r(nL[0])} ${r(nL[1])} Z`;
 
   g += `<g id="cadJacket">${fab(torsoD, { tone: type === 'tibbiyot_xalat' ? 0 : 0 })}`;
+  // Yoqaning ichki tomoni (bo'yin teshigi)
+  g += `<ellipse cx="${cx}" cy="${r(neckB - 5)}" rx="${r(neckH + 7)}" ry="9" fill="${cadShade(base, -0.62)}" stroke="${outline}" stroke-width="1"/>`
+    + `<path d="M ${r(cx - neckH - 6)} ${r(neckB - 7)} Q ${cx} ${r(neckB - 19)} ${r(cx + neckH + 6)} ${r(neckB - 7)}" fill="none" stroke="${cadShade(base, -0.25)}" stroke-width="3"/>`;
   // Tana burmalari
   g += crease(`M ${r(cx - chH + 4)} ${r(pitY + 28)} Q ${r(cx - chH * 0.5)} ${r(pitY + 40)} ${r(cx - 6)} ${r(pitY + 34)}`, 0.10)
     + crease(`M ${r(cx + chH - 4)} ${r(pitY + 28)} Q ${r(cx + chH * 0.5)} ${r(pitY + 40)} ${r(cx + 6)} ${r(pitY + 34)}`, 0.10)
@@ -615,40 +591,48 @@ function renderCadSvg() {
     const so = sl.o(0.5), sw = sl.o(1);
     const lg = legAt((crotchY + trHem) / 2);
     g += `
-      <g id="cadGuides" font-family="monospace" font-size="10" font-weight="bold" fill="#38BDF8">
+      <g id="cadGuides" font-family="monospace" font-size="10" font-weight="bold" fill="#1773D6">
         <g>
-          <line x1="${r(cx - shH)}" y1="${r(shY - 12)}" x2="${r(cx + shH)}" y2="${r(shY - 12)}" stroke="#38BDF8" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-          <line x1="${r(cx - shH)}" y1="${r(shY - 16)}" x2="${r(cx - shH)}" y2="${r(shY)}" stroke="#38BDF8" stroke-width=".8" stroke-dasharray="2,2"/>
-          <line x1="${r(cx + shH)}" y1="${r(shY - 16)}" x2="${r(cx + shH)}" y2="${r(shY)}" stroke="#38BDF8" stroke-width=".8" stroke-dasharray="2,2"/>
-          <rect x="${r(cx - shH - 100)}" y="${r(shY - 20)}" width="92" height="15" rx="3" fill="#061320" stroke="#38BDF8" stroke-width=".8"/>
+          <line x1="${r(cx - shH)}" y1="${r(shY - 12)}" x2="${r(cx + shH)}" y2="${r(shY - 12)}" stroke="#1773D6" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <line x1="${r(cx - shH)}" y1="${r(shY - 16)}" x2="${r(cx - shH)}" y2="${r(shY)}" stroke="#1773D6" stroke-width=".8" stroke-dasharray="2,2"/>
+          <line x1="${r(cx + shH)}" y1="${r(shY - 16)}" x2="${r(cx + shH)}" y2="${r(shY)}" stroke="#1773D6" stroke-width=".8" stroke-dasharray="2,2"/>
+          <rect x="${r(cx - shH - 100)}" y="${r(shY - 20)}" width="92" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
           <text x="${r(cx - shH - 54)}" y="${r(shY - 9)}" text-anchor="middle">↔ Yelka: ${s.shoulder}sm</text>
         </g>
         <g>
-          <line x1="${r(cx - chH)}" y1="${r(pitY + 56)}" x2="${r(cx + chH)}" y2="${r(pitY + 56)}" stroke="#38BDF8" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-          <rect x="${cx - 48}" y="${r(pitY + 48)}" width="96" height="15" rx="3" fill="#061320" stroke="#38BDF8" stroke-width=".8"/>
+          <line x1="${r(cx - chH)}" y1="${r(pitY + 56)}" x2="${r(cx + chH)}" y2="${r(pitY + 56)}" stroke="#1773D6" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <rect x="${cx - 48}" y="${r(pitY + 48)}" width="96" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
           <text x="${cx}" y="${r(pitY + 59)}" text-anchor="middle">↔ Ko'krak: ${s.chest}sm</text>
         </g>
         <g>
-          <line x1="${r(cx - waH)}" y1="${r(waistY + 24)}" x2="${r(cx + waH)}" y2="${r(waistY + 24)}" stroke="#38BDF8" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-          <rect x="${cx - 40}" y="${r(waistY + 16)}" width="80" height="15" rx="3" fill="#061320" stroke="#38BDF8" stroke-width=".8"/>
+          <line x1="${r(cx - waH)}" y1="${r(waistY + 24)}" x2="${r(cx + waH)}" y2="${r(waistY + 24)}" stroke="#1773D6" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <rect x="${cx - 40}" y="${r(waistY + 16)}" width="80" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
           <text x="${cx}" y="${r(waistY + 27)}" text-anchor="middle">↔ Bel: ${s.waist}sm</text>
         </g>
         <g>
-          <line x1="${r(so[0] + 30)}" y1="${r(sl.o(0)[1])}" x2="${r(sw[0] + 30)}" y2="${r(sw[1])}" stroke="#38BDF8" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-          <rect x="${r(so[0] + 36)}" y="${r(so[1] - 8)}" width="80" height="15" rx="3" fill="#061320" stroke="#38BDF8" stroke-width=".8"/>
+          <line x1="${r(so[0] + 30)}" y1="${r(sl.o(0)[1])}" x2="${r(sw[0] + 30)}" y2="${r(sw[1])}" stroke="#1773D6" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <rect x="${r(so[0] + 36)}" y="${r(so[1] - 8)}" width="80" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
           <text x="${r(so[0] + 76)}" y="${r(so[1] + 3)}" text-anchor="middle">↕ Yeng: ${s.sleeve}sm</text>
         </g>
         <g>
-          <line x1="${r(cx + lg.c + lg.hw + 26)}" y1="${r(waistY)}" x2="${r(cx + st[4].c + st[4].hw + 26)}" y2="${r(trHem)}" stroke="#38BDF8" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-          <rect x="${r(cx + lg.c + lg.hw + 32)}" y="${r((crotchY + trHem) / 2 + 40)}" width="80" height="15" rx="3" fill="#061320" stroke="#38BDF8" stroke-width=".8"/>
+          <rect x="${r(sw[0] + 36)}" y="${r(sw[1] + 4)}" width="84" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
+          <text x="${r(sw[0] + 78)}" y="${r(sw[1] + 15)}" text-anchor="middle">○ Bilak: ${s.wrist}sm</text>
+        </g>
+        <g>
+          <rect x="${r(cx - st[2].c - st[2].hw - 96)}" y="${r(st[2].y - 8)}" width="84" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
+          <text x="${r(cx - st[2].c - st[2].hw - 54)}" y="${r(st[2].y + 3)}" text-anchor="middle">○ Tizza: ${s.knee}sm</text>
+        </g>
+        <g>
+          <line x1="${r(cx + lg.c + lg.hw + 26)}" y1="${r(waistY)}" x2="${r(cx + st[4].c + st[4].hw + 26)}" y2="${r(trHem)}" stroke="#1773D6" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <rect x="${r(cx + lg.c + lg.hw + 32)}" y="${r((crotchY + trHem) / 2 + 40)}" width="80" height="15" rx="3" fill="#FFFFFF" stroke="#1773D6" stroke-width=".8"/>
           <text x="${r(cx + lg.c + lg.hw + 72)}" y="${r((crotchY + trHem) / 2 + 51)}" text-anchor="middle">↕ Shim: ${s.trouserLen}sm</text>
         </g>
         <g>
-          <line x1="28" y1="${r(headTop)}" x2="28" y2="${floor}" stroke="#10B981" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-          <line x1="22" y1="${r(headTop)}" x2="34" y2="${r(headTop)}" stroke="#10B981" stroke-width="1.4"/>
-          <line x1="22" y1="${floor}" x2="34" y2="${floor}" stroke="#10B981" stroke-width="1.4"/>
-          <rect x="10" y="${r((headTop + floor) / 2 - 9)}" width="90" height="18" rx="3" fill="#061320" stroke="#10B981" stroke-width="1"/>
-          <text x="55" y="${r((headTop + floor) / 2 + 4)}" text-anchor="middle" fill="#10B981">↕ Bo'y: ${s.height}sm</text>
+          <line x1="28" y1="${r(headTop)}" x2="28" y2="${floor}" stroke="#047857" stroke-width="1.4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+          <line x1="22" y1="${r(headTop)}" x2="34" y2="${r(headTop)}" stroke="#047857" stroke-width="1.4"/>
+          <line x1="22" y1="${floor}" x2="34" y2="${floor}" stroke="#047857" stroke-width="1.4"/>
+          <rect x="10" y="${r((headTop + floor) / 2 - 9)}" width="90" height="18" rx="3" fill="#FFFFFF" stroke="#047857" stroke-width="1"/>
+          <text x="55" y="${r((headTop + floor) / 2 + 4)}" text-anchor="middle" fill="#047857">↕ Bo'y: ${s.height}sm</text>
         </g>
       </g>`;
   }

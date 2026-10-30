@@ -19,6 +19,8 @@ let cadState = {
   thigh: 56,
   trouserBottom: 42,
   head: 58,
+  wrist: 18,
+  knee: 40,
   bloodGroup: 'II (A) Rh+',
   rank: 'Mayor',
   uniformType: 'iiv_patrol',
@@ -83,15 +85,15 @@ function syncTailorInput(param, val) {
 // --- Quick Presets ---
 function applySizePreset(size, rost) {
   const presets = {
-    '46_3': { height: 168, chest: 92, waist: 80, shoulder: 44, sleeve: 62, jacketLen: 68, neck: 39, trouserLen: 100, trouserWaist: 78, hips: 94, thigh: 52, trouserBottom: 40, head: 56 },
-    '48_3': { height: 170, chest: 96, waist: 84, shoulder: 46, sleeve: 63, jacketLen: 70, neck: 40, trouserLen: 102, trouserWaist: 82, hips: 98, thigh: 54, trouserBottom: 40, head: 57 },
-    '50_4': { height: 174, chest: 100, waist: 88, shoulder: 47, sleeve: 64, jacketLen: 71, neck: 40, trouserLen: 104, trouserWaist: 86, hips: 100, thigh: 55, trouserBottom: 42, head: 57 },
-    '52_4': { height: 176, chest: 104, waist: 92, shoulder: 48, sleeve: 65, jacketLen: 72, neck: 41, trouserLen: 105, trouserWaist: 90, hips: 104, thigh: 56, trouserBottom: 42, head: 58 },
-    '54_4': { height: 176, chest: 108, waist: 98, shoulder: 50, sleeve: 65, jacketLen: 73, neck: 42, trouserLen: 106, trouserWaist: 94, hips: 108, thigh: 58, trouserBottom: 42, head: 58 },
-    '56_5': { height: 182, chest: 112, waist: 104, shoulder: 51, sleeve: 67, jacketLen: 75, neck: 43, trouserLen: 108, trouserWaist: 100, hips: 112, thigh: 60, trouserBottom: 44, head: 59 },
-    '58_5': { height: 182, chest: 116, waist: 110, shoulder: 52, sleeve: 67, jacketLen: 76, neck: 44, trouserLen: 109, trouserWaist: 106, hips: 116, thigh: 62, trouserBottom: 44, head: 60 },
-    '60_5': { height: 182, chest: 120, waist: 116, shoulder: 54, sleeve: 68, jacketLen: 77, neck: 45, trouserLen: 110, trouserWaist: 112, hips: 122, thigh: 64, trouserBottom: 44, head: 60 },
-    '62_6': { height: 188, chest: 124, waist: 122, shoulder: 55, sleeve: 69, jacketLen: 78, neck: 46, trouserLen: 112, trouserWaist: 118, hips: 126, thigh: 66, trouserBottom: 46, head: 61 }
+    '46_3': { height: 168, chest: 92, waist: 80, shoulder: 44, sleeve: 62, jacketLen: 68, neck: 39, trouserLen: 100, trouserWaist: 78, hips: 94, thigh: 52, trouserBottom: 40, head: 56, wrist: 16, knee: 36 },
+    '48_3': { height: 170, chest: 96, waist: 84, shoulder: 46, sleeve: 63, jacketLen: 70, neck: 40, trouserLen: 102, trouserWaist: 82, hips: 98, thigh: 54, trouserBottom: 40, head: 57, wrist: 16, knee: 37 },
+    '50_4': { height: 174, chest: 100, waist: 88, shoulder: 47, sleeve: 64, jacketLen: 71, neck: 40, trouserLen: 104, trouserWaist: 86, hips: 100, thigh: 55, trouserBottom: 42, head: 57, wrist: 17, knee: 38 },
+    '52_4': { height: 176, chest: 104, waist: 92, shoulder: 48, sleeve: 65, jacketLen: 72, neck: 41, trouserLen: 105, trouserWaist: 90, hips: 104, thigh: 56, trouserBottom: 42, head: 58, wrist: 18, knee: 40 },
+    '54_4': { height: 176, chest: 108, waist: 98, shoulder: 50, sleeve: 65, jacketLen: 73, neck: 42, trouserLen: 106, trouserWaist: 94, hips: 108, thigh: 58, trouserBottom: 42, head: 58, wrist: 18, knee: 41 },
+    '56_5': { height: 182, chest: 112, waist: 104, shoulder: 51, sleeve: 67, jacketLen: 75, neck: 43, trouserLen: 108, trouserWaist: 100, hips: 112, thigh: 60, trouserBottom: 44, head: 59, wrist: 19, knee: 42 },
+    '58_5': { height: 182, chest: 116, waist: 110, shoulder: 52, sleeve: 67, jacketLen: 76, neck: 44, trouserLen: 109, trouserWaist: 106, hips: 116, thigh: 62, trouserBottom: 44, head: 60, wrist: 19, knee: 43 },
+    '60_5': { height: 182, chest: 120, waist: 116, shoulder: 54, sleeve: 68, jacketLen: 77, neck: 45, trouserLen: 110, trouserWaist: 112, hips: 122, thigh: 64, trouserBottom: 44, head: 60, wrist: 20, knee: 44 },
+    '62_6': { height: 188, chest: 124, waist: 122, shoulder: 55, sleeve: 69, jacketLen: 78, neck: 46, trouserLen: 112, trouserWaist: 118, hips: 126, thigh: 66, trouserBottom: 46, head: 61, wrist: 20, knee: 46 }
   };
 
   const key = `${size}_${rost}`;
