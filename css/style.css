@@ -215,10 +215,19 @@ dl { margin: 0; }
   background: var(--ink); color: var(--ink-tx);
   border-bottom: 1px solid var(--ink-line-2);
 }
-.hdr-in { display: flex; align-items: center; gap: 1.2rem; min-height: 88px; }
-.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; flex: 0 0 auto; }
-.brand-logo-svg, .brand-logo-img { height: 56px; width: auto; max-width: 235px; display: block; object-fit: contain; transition: transform .18s ease; }
-.brand:hover .brand-logo-svg, .brand:hover .brand-logo-img { transform: scale(1.03); }
+.hdr-in { display: flex; align-items: center; gap: 1.2rem; min-height: 86px; }
+.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; flex: 0 0 auto; min-width: 0; }
+.brand-logo-svg, .brand-logo-img {
+  height: 54px;
+  width: auto;
+  max-width: 220px;
+  aspect-ratio: 720 / 194;
+  display: block;
+  object-fit: contain;
+  transition: transform .18s ease, opacity .18s ease;
+  image-rendering: -webkit-optimize-contrast;
+}
+.brand:hover .brand-logo-svg, .brand:hover .brand-logo-img { transform: scale(1.02); }
 
 .nav { display: flex; margin-left: auto; gap: .2rem; }
 .nav a { text-decoration: none; font-size: .88rem; font-weight: 600; color: var(--ink-mute); padding: .45rem .65rem; transition: color .15s; border-radius: var(--r); }
@@ -248,8 +257,25 @@ dl { margin: 0; }
 .mnav a { text-decoration: none; color: var(--ink-tx); font-weight: 600; padding: .8rem .2rem; border-bottom: 1px solid var(--ink-line-2); }
 .mnav .btn { margin-top: 1rem; }
 
-@media (max-width: 1040px) { .nav, .hdr-act > .btn { display: none; } .burger { display: inline-flex; } .hdr-act { margin-left: auto; } }
-@media (max-width: 540px) { .tel-link span { display: none; } .brand-logo-svg, .brand-logo-img { height: 44px; } }
+@media (max-width: 1040px) {
+  .nav, .hdr-act > .btn { display: none; }
+  .burger { display: inline-flex; }
+  .hdr-act { margin-left: auto; gap: .45rem; }
+  .hdr-in { min-height: 72px; gap: .8rem; }
+  .brand-logo-svg, .brand-logo-img { height: 46px; max-width: 185px; }
+}
+@media (max-width: 540px) {
+  .hdr-in { min-height: 62px; gap: .45rem; }
+  .tel-link span { display: none; }
+  .tel-link { padding: .32rem .45rem; font-size: .8rem; }
+  .brand-logo-svg, .brand-logo-img { height: 38px; max-width: 150px; }
+}
+@media (max-width: 380px) {
+  .hdr-in { min-height: 56px; gap: .3rem; }
+  .brand-logo-svg, .brand-logo-img { height: 32px; max-width: 125px; }
+  .hdr-act { gap: .25rem; }
+  .lang a, .lang span { padding: .24rem .34rem; font-size: .66rem; }
+}
 
 /* ==========================================================================
    2. HERO SECTION
@@ -855,7 +881,18 @@ dl { margin: 0; }
 .foot-frame > .maps        { grid-column: 1; grid-row: 2; }
 
 .foot-lockup { display: flex; flex-direction: column; gap: .75rem; }
-.foot-logo-img { height: 48px; width: auto; object-fit: contain; align-self: flex-start; }
+.foot-logo-img {
+  height: 50px;
+  width: auto;
+  max-width: 210px;
+  aspect-ratio: 720 / 194;
+  object-fit: contain;
+  align-self: flex-start;
+  display: block;
+}
+@media (max-width: 540px) {
+  .foot-logo-img { height: 42px; max-width: 170px; }
+}
 .foot-lockup p { color: var(--ink-mute); font-size: .83rem; margin-top: .2rem; line-height: 1.5; }
 
 .maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; width: 100%; align-self: end; }
