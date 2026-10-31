@@ -17,7 +17,7 @@ Hozirgi ustuvor yo'nalish: **UX/UI mantig'ini va sayt arxitekturasini profession
 
 ## Boshqa
 - Boshqa formalar uchun haqiqiy maneken fotolari (`docs/MODEL-PHOTOS.md`).
-- Serverda avtomatik yangilash (push dan keyin).
+- [tayyor, yoqish kerak] Serverda yangilash: `deploy/` (skript, Nginx sozlamasi, qo'llanma), `.github/workflows` (tekshiruv ishlaydi, deploy o'chirilgan). Serverga kirish bo'lmagani uchun yoqishni egasi bajaradi (`deploy/README.md`).
 
 ## Eslatma
 - "Maxfiylik siyosati" endi modal oyna (qisqa matn, mavjud bayonotga asoslangan). To'liq yuridik matnni egasi tasdiqlashi kerak.

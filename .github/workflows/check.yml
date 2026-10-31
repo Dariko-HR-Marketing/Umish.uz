@@ -1,0 +1,17 @@
+name: Tekshiruv
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Loyiha tekshiruvi (JS sintaksisi, havolalar, JSON-LD, sitemap)
+        run: node scripts/check.mjs
