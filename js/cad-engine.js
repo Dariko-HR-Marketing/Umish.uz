@@ -49,6 +49,27 @@ function switchCalcTab(tabId) {
   });
   if (tabId === 'tailor') updateTailorCad();
   if (tabId === 'batch') renderBatchTable();
+  tabs.forEach(t => {
+    const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (btn) btn.setAttribute('aria-selected', String(t === tabId));
+  });
+  renderCalcNext(tabId);
+}
+
+// "Keyingi qadam" paneli: kalkulyatorning 1 → 2 → 3 ketma-ketligi
+function renderCalcNext(tabId) {
+  const box = document.getElementById('calcNext');
+  if (!box) return;
+  const steps = {
+    tailor: { n: 1, label: "O'lchovlar", next: ['batch', "Keyingi qadam: Xodimlar jadvali"], prev: null },
+    batch: { n: 2, label: 'Xodimlar jadvali', next: ['budget', 'Keyingi qadam: Narx hisobi'], prev: ['tailor', "Orqaga: O'lchovlar"] },
+    budget: { n: 3, label: 'Narx hisobi', next: null, prev: ['batch', 'Orqaga: Xodimlar jadvali'] }
+  };
+  const st = steps[tabId];
+  if (!st) return;
+  const nav = ([id, text], cls) => `<button type="button" class="btn ${cls} btn--sm" onclick="switchCalcTab('${id}'); document.getElementById('kalkulyator').scrollIntoView({behavior:'smooth', block:'start'});">${text}</button>`;
+  box.innerHTML = `<span class="calc-next-step">Qadam <b>${st.n}</b> / 3 · ${st.label}</span><span class="calc-next-btns">`
+    + (st.prev ? nav(st.prev, 'btn--out') : '') + (st.next ? nav(st.next, 'btn--blue') : '') + `</span>`;
 }
 
 function switchCadSub(subId) {

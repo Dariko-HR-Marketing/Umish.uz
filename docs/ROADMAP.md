@@ -9,12 +9,15 @@ Hozirgi ustuvor yo'nalish: **UX/UI mantig'ini va sayt arxitekturasini profession
 1. [bajarildi] Mobilda natija (razmer, mato) va "Buyurtma" tugmasi 3D ostida qotirilgan panelda. Sahifa uzunligi hali qisqartirilmagan.
 2. [bajarildi] Mobilda 3D ko'rinish yuqorida qotadi, slayderlar ostida aylanadi.
 3. [bajarildi] Soha kartasi: "Narxni hisoblash" kalkulyatorning 3-tabiga sohani tanlab olib boradi; "Ariza qoldirish" ikkinchi havola. Qo'shimcha: mobilda 3-tab ustunlari tuzatildi.
-4. Kalkulyator tablari uchun qadam ko'rsatkichi (1 → 2 → 3).
-5. Haqiqiy `/ru/` sahifasi yoki `hreflang="ru"` ni olib tashlash.
-6. Bosish maydonlari ≥ 44 px, raqam maydonlariga `aria-label`.
+4. [bajarildi] Kalkulyator: "Qadam 1/3" paneli, "Keyingi qadam" / "Orqaga" tugmalari, tab uchun ARIA rollari.
+5. [qisman] Mavjud bo'lmagan `/ru/` ga ko'rsatuvchi `hreflang="ru"` olib tashlandi. Haqiqiy `/ru/` sahifasi hali yo'q (rus tili modal oyna).
+6. [bajarildi] Sensorli ekranlarda bosish maydonlari 40–44 px, barcha slayder va raqam maydonlariga `aria-label`.
 7. Rasmlarni WebP/`srcset` ga o'tkazish, `width/height` berish.
 8. Narxlarni koddan alohida sozlamaga chiqarish.
 
 ## Boshqa
 - Boshqa formalar uchun haqiqiy maneken fotolari (`docs/MODEL-PHOTOS.md`).
 - Serverda avtomatik yangilash (push dan keyin).
+
+## Eslatma
+- Footerdagi "Maxfiylik siyosati" havolasi hozir `alert()` ko'rsatadi (vaqtinchalik matn). Haqiqiy sahifa yoki bo'lim kerak.

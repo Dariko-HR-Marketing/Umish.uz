@@ -7,7 +7,6 @@
 <meta name="description" content="Umish.uz — Sifatli uniforma. Yagona standart. Harbiy, IIV, sanoat (spetsodejda), tibbiyot, HoReCa va korporativ kiyimlar ishlab chiqarish fabrikasi. Tel: +998 (91) 447-32-08">
 <link rel="canonical" href="https://umish.uz/">
 <link rel="alternate" hreflang="uz" href="https://umish.uz/">
-<link rel="alternate" hreflang="ru" href="https://umish.uz/ru/">
 <link rel="alternate" hreflang="x-default" href="https://umish.uz/">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#0B2238">
@@ -730,23 +729,23 @@
 
   <div class="wrap">
     <!-- 3-Tab Navigator -->
-    <div class="calc-tabs-bar">
-      <button type="button" class="calc-tab-btn is-active" id="tabBtnTailor" onclick="switchCalcTab('tailor')">
+    <div class="calc-tabs-bar" role="tablist" aria-label="Kalkulyator qadamlari">
+      <button type="button" class="calc-tab-btn is-active" id="tabBtnTailor" role="tab" aria-controls="panelTailor" aria-selected="true" onclick="switchCalcTab('tailor')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
         1. Smart Tikuv O'lchovlari & Jonli Siluet (CAD)
       </button>
-      <button type="button" class="calc-tab-btn" id="tabBtnBatch" onclick="switchCalcTab('batch')">
+      <button type="button" class="calc-tab-btn" id="tabBtnBatch" role="tab" aria-controls="panelBatch" aria-selected="false" onclick="switchCalcTab('batch')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         2. Xodimlar O'lchov Jadvali (Vedomost) <span class="batch-badge" id="batchBadgeCount">7 nafar</span>
       </button>
-      <button type="button" class="calc-tab-btn" id="tabBtnBudget" onclick="switchCalcTab('budget')">
+      <button type="button" class="calc-tab-btn" id="tabBtnBudget" role="tab" aria-controls="panelBudget" aria-selected="false" onclick="switchCalcTab('budget')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
         3. Tezkor B2B Byudjet & Partiya Narxi
       </button>
     </div>
 
     <!-- TAB 1: SMART TAILOR CAD WORKSPACE -->
-    <div id="panelTailor" class="cad-grid">
+    <div id="panelTailor" role="tabpanel" class="cad-grid">
       <!-- 1-Ustun: O'lchov boshqaruvi -->
       <div class="cad-col-controls">
         <div>
@@ -792,8 +791,8 @@
               <b id="valHeight">176 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tHeight" min="150" max="205" value="176" oninput="syncTailorInput('Height', this.value)">
-              <input type="number" id="numHeight" min="150" max="205" value="176" oninput="syncTailorInput('Height', this.value)">
+              <input type="range" id="tHeight" aria-label="Umumiy bo'y (Rost) (sm)" min="150" max="205" value="176" oninput="syncTailorInput('Height', this.value)">
+              <input type="number" id="numHeight" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="150" max="205" value="176" oninput="syncTailorInput('Height', this.value)">
             </div>
           </div>
 
@@ -804,8 +803,8 @@
               <b id="valChest">104 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tChest" min="84" max="144" value="104" oninput="syncTailorInput('Chest', this.value)">
-              <input type="number" id="numChest" min="84" max="144" value="104" oninput="syncTailorInput('Chest', this.value)">
+              <input type="range" id="tChest" aria-label="Umumiy bo'y (Rost) (sm)" min="84" max="144" value="104" oninput="syncTailorInput('Chest', this.value)">
+              <input type="number" id="numChest" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="84" max="144" value="104" oninput="syncTailorInput('Chest', this.value)">
             </div>
           </div>
 
@@ -816,8 +815,8 @@
               <b id="valWaist">92 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tWaist" min="70" max="140" value="92" oninput="syncTailorInput('Waist', this.value)">
-              <input type="number" id="numWaist" min="70" max="140" value="92" oninput="syncTailorInput('Waist', this.value)">
+              <input type="range" id="tWaist" aria-label="Umumiy bo'y (Rost) (sm)" min="70" max="140" value="92" oninput="syncTailorInput('Waist', this.value)">
+              <input type="number" id="numWaist" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="70" max="140" value="92" oninput="syncTailorInput('Waist', this.value)">
             </div>
           </div>
 
@@ -828,8 +827,8 @@
               <b id="valShoulder">48 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tShoulder" min="38" max="58" value="48" oninput="syncTailorInput('Shoulder', this.value)">
-              <input type="number" id="numShoulder" min="38" max="58" value="48" oninput="syncTailorInput('Shoulder', this.value)">
+              <input type="range" id="tShoulder" aria-label="Umumiy bo'y (Rost) (sm)" min="38" max="58" value="48" oninput="syncTailorInput('Shoulder', this.value)">
+              <input type="number" id="numShoulder" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="38" max="58" value="48" oninput="syncTailorInput('Shoulder', this.value)">
             </div>
           </div>
 
@@ -840,8 +839,8 @@
               <b id="valSleeve">65 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tSleeve" min="54" max="75" value="65" oninput="syncTailorInput('Sleeve', this.value)">
-              <input type="number" id="numSleeve" min="54" max="75" value="65" oninput="syncTailorInput('Sleeve', this.value)">
+              <input type="range" id="tSleeve" aria-label="Umumiy bo'y (Rost) (sm)" min="54" max="75" value="65" oninput="syncTailorInput('Sleeve', this.value)">
+              <input type="number" id="numSleeve" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="54" max="75" value="65" oninput="syncTailorInput('Sleeve', this.value)">
             </div>
           </div>
 
@@ -852,8 +851,8 @@
               <b id="valJacketLen">72 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tJacketLen" min="60" max="88" value="72" oninput="syncTailorInput('JacketLen', this.value)">
-              <input type="number" id="numJacketLen" min="60" max="88" value="72" oninput="syncTailorInput('JacketLen', this.value)">
+              <input type="range" id="tJacketLen" aria-label="Umumiy bo'y (Rost) (sm)" min="60" max="88" value="72" oninput="syncTailorInput('JacketLen', this.value)">
+              <input type="number" id="numJacketLen" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="60" max="88" value="72" oninput="syncTailorInput('JacketLen', this.value)">
             </div>
           </div>
 
@@ -864,8 +863,8 @@
               <b id="valNeck">41 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tNeck" min="36" max="52" value="41" oninput="syncTailorInput('Neck', this.value)">
-              <input type="number" id="numNeck" min="36" max="52" value="41" oninput="syncTailorInput('Neck', this.value)">
+              <input type="range" id="tNeck" aria-label="Umumiy bo'y (Rost) (sm)" min="36" max="52" value="41" oninput="syncTailorInput('Neck', this.value)">
+              <input type="number" id="numNeck" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="36" max="52" value="41" oninput="syncTailorInput('Neck', this.value)">
             </div>
           </div>
 
@@ -876,8 +875,8 @@
               <b id="valWrist">18 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tWrist" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
-              <input type="number" id="numWrist" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
+              <input type="range" id="tWrist" aria-label="Umumiy bo'y (Rost) (sm)" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
+              <input type="number" id="numWrist" aria-label="Umumiy bo'y (Rost), aniq qiymat (sm)" inputmode="numeric" min="14" max="26" value="18" oninput="syncTailorInput('Wrist', this.value)">
             </div>
           </div>
         </div>
@@ -891,8 +890,8 @@
               <b id="valTrouserLen">105 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tTrouserLen" min="90" max="120" value="105" oninput="syncTailorInput('TrouserLen', this.value)">
-              <input type="number" id="numTrouserLen" min="90" max="120" value="105" oninput="syncTailorInput('TrouserLen', this.value)">
+              <input type="range" id="tTrouserLen" aria-label="Shim uzunligi (ДБ / Bo'y Burka) (sm)" min="90" max="120" value="105" oninput="syncTailorInput('TrouserLen', this.value)">
+              <input type="number" id="numTrouserLen" aria-label="Shim uzunligi (ДБ / Bo'y Burka), aniq qiymat (sm)" inputmode="numeric" min="90" max="120" value="105" oninput="syncTailorInput('TrouserLen', this.value)">
             </div>
           </div>
 
@@ -903,8 +902,8 @@
               <b id="valTrouserWaist">90 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tTrouserWaist" min="70" max="138" value="90" oninput="syncTailorInput('TrouserWaist', this.value)">
-              <input type="number" id="numTrouserWaist" min="70" max="138" value="90" oninput="syncTailorInput('TrouserWaist', this.value)">
+              <input type="range" id="tTrouserWaist" aria-label="Shim uzunligi (ДБ / Bo'y Burka) (sm)" min="70" max="138" value="90" oninput="syncTailorInput('TrouserWaist', this.value)">
+              <input type="number" id="numTrouserWaist" aria-label="Shim uzunligi (ДБ / Bo'y Burka), aniq qiymat (sm)" inputmode="numeric" min="70" max="138" value="90" oninput="syncTailorInput('TrouserWaist', this.value)">
             </div>
           </div>
 
@@ -915,8 +914,8 @@
               <b id="valHips">102 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tHips" min="86" max="144" value="102" oninput="syncTailorInput('Hips', this.value)">
-              <input type="number" id="numHips" min="86" max="144" value="102" oninput="syncTailorInput('Hips', this.value)">
+              <input type="range" id="tHips" aria-label="Shim uzunligi (ДБ / Bo'y Burka) (sm)" min="86" max="144" value="102" oninput="syncTailorInput('Hips', this.value)">
+              <input type="number" id="numHips" aria-label="Shim uzunligi (ДБ / Bo'y Burka), aniq qiymat (sm)" inputmode="numeric" min="86" max="144" value="102" oninput="syncTailorInput('Hips', this.value)">
             </div>
           </div>
 
@@ -927,8 +926,8 @@
               <b id="valThigh">56 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tThigh" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
-              <input type="number" id="numThigh" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
+              <input type="range" id="tThigh" aria-label="Shim uzunligi (ДБ / Bo'y Burka) (sm)" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
+              <input type="number" id="numThigh" aria-label="Shim uzunligi (ДБ / Bo'y Burka), aniq qiymat (sm)" inputmode="numeric" min="44" max="76" value="56" oninput="syncTailorInput('Thigh', this.value)">
             </div>
           </div>
 
@@ -939,8 +938,8 @@
               <b id="valKnee">40 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tKnee" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
-              <input type="number" id="numKnee" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
+              <input type="range" id="tKnee" aria-label="Shim uzunligi (ДБ / Bo'y Burka) (sm)" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
+              <input type="number" id="numKnee" aria-label="Shim uzunligi (ДБ / Bo'y Burka), aniq qiymat (sm)" inputmode="numeric" min="34" max="56" value="40" oninput="syncTailorInput('Knee', this.value)">
             </div>
           </div>
 
@@ -951,8 +950,8 @@
               <b id="valTrouserBottom">42 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tTrouserBottom" min="34" max="52" value="42" oninput="syncTailorInput('TrouserBottom', this.value)">
-              <input type="number" id="numTrouserBottom" min="34" max="52" value="42" oninput="syncTailorInput('TrouserBottom', this.value)">
+              <input type="range" id="tTrouserBottom" aria-label="Shim uzunligi (ДБ / Bo'y Burka) (sm)" min="34" max="52" value="42" oninput="syncTailorInput('TrouserBottom', this.value)">
+              <input type="number" id="numTrouserBottom" aria-label="Shim uzunligi (ДБ / Bo'y Burka), aniq qiymat (sm)" inputmode="numeric" min="34" max="52" value="42" oninput="syncTailorInput('TrouserBottom', this.value)">
             </div>
           </div>
         </div>
@@ -966,8 +965,8 @@
               <b id="valHead">58 sm</b>
             </div>
             <div class="cad-slider-track">
-              <input type="range" id="tHead" min="53" max="64" value="58" oninput="syncTailorInput('Head', this.value)">
-              <input type="number" id="numHead" min="53" max="64" value="58" oninput="syncTailorInput('Head', this.value)">
+              <input type="range" id="tHead" aria-label="Bosh aylanasi (Bosh kiyim / Kepi) (sm)" min="53" max="64" value="58" oninput="syncTailorInput('Head', this.value)">
+              <input type="number" id="numHead" aria-label="Bosh aylanasi (Bosh kiyim / Kepi), aniq qiymat (sm)" inputmode="numeric" min="53" max="64" value="58" oninput="syncTailorInput('Head', this.value)">
             </div>
           </div>
 
@@ -1128,7 +1127,7 @@
     </div>
 
     <!-- TAB 2: XODIMLAR O'LCHOV JADVALI (VEDOMOST) -->
-    <div id="panelBatch" class="batch-box" style="display:none;">
+    <div id="panelBatch" role="tabpanel" class="batch-box" style="display:none;">
       <div class="batch-toolbar">
         <div>
           <b style="font-size:1.05rem; color:var(--tx);">Jamoaviy Tikuv Buyurtmalari & O'lchov Vedomosti</b>
@@ -1196,7 +1195,7 @@
     </div>
 
     <!-- TAB 3: TEZKOR B2B BYUDJET & PARTIYA NARXI -->
-    <div id="panelBudget" class="calc-box rv" style="display:none;">
+    <div id="panelBudget" role="tabpanel" class="calc-box rv" style="display:none;">
       <!-- Chap tomon: Parametrlar -->
       <div class="calc-form">
         <div class="calc-field">
@@ -1224,7 +1223,7 @@
         <div class="calc-field">
           <label for="calcQty">Buyurtma miqdori (dona):</label>
           <div class="calc-slider-box">
-            <input type="range" id="calcQty" min="10" max="1000" step="10" value="50" oninput="updateCalc()">
+            <input type="range" id="calcQty" aria-label="Buyurtma miqdori (dona)" min="10" max="1000" step="10" value="50" oninput="updateCalc()">
             <span class="calc-val-badge" id="calcQtyVal">50 dona</span>
           </div>
         </div>
@@ -1294,6 +1293,7 @@
         </button>
       </div>
     </div>
+    <div id="calcNext" class="calc-next" aria-live="polite"></div>
   </div>
 </section>
 

@@ -89,3 +89,4 @@ updateCalc();
 // Initial CAD and Batch load
 updateTailorCad();
 renderBatchTable();
+renderCalcNext("tailor");
