@@ -16,6 +16,7 @@
 - `js/batch-vedomost.js` — xodimlar jadvali, CSV eksport, A4 print, buyurtma
 - `js/pricing-config.js` — narxlar va chegirmalar (`UMISH_PRICING`): narxni o'zgartirish uchun faqat shu fayl
 - `js/b2b-pricing.js` — partiya narxi hisobi (`updateCalc`) va dastlabki ishga tushirish
+- `scripts/check.mjs` — loyiha tekshiruvi (`node scripts/check.mjs`); `deploy/` — serverga yuborish; `.github/workflows/` — avtomatik tekshiruv (deploy o'chirilgan)
 - Skriptlar klassik (modulsiz) va `index.html` oxirida shu tartibda ulanadi; `onclick` ishlatadigan funksiyalar global bo'lib qolishi shart.
 
 ## Qoidalar

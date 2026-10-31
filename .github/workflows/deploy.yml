@@ -1,0 +1,36 @@
+name: Serverga yuborish (deploy)
+
+# Faqat repo o'zgaruvchisi DEPLOY_ENABLED=true bo'lsa va maxfiy kalitlar kiritilgan bo'lsa ishlaydi.
+# Sozlash: deploy/README.md
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.DEPLOY_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Tekshiruv
+        run: node scripts/check.mjs
+      - name: Serverda yangilash
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+          SITE_DIR: ${{ vars.SITE_DIR }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_deploy && chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -i ~/.ssh/id_deploy "$DEPLOY_USER@$DEPLOY_HOST" "SITE_DIR='${SITE_DIR:-/var/www/umish.uz}' bash -s" < deploy/deploy.sh
