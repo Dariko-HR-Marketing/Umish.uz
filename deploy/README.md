@@ -59,7 +59,7 @@ Ikkala variantni bir vaqtda yoqish shart emas.
 
 - Brauzerda `Ctrl+Shift+R`, konsolda xato yo'qligini ko'ring.
 - Kalkulyator: 3D maneken ochilyaptimi, slayder o'zgarganda forma o'zgaryaptimi.
-- `curl -s https://umish.uz/ | grep -c cad-3d` o'rniga: `curl -sI https://umish.uz/js/cad-3d.js` 200 qaytarsin.
+- `curl -sI https://umish.uz/js/cad-3d.js` 200 qaytarsin.
 
 ## 4. Orqaga qaytarish (agar kerak bo'lsa)
 
