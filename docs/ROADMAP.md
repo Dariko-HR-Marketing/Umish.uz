@@ -6,18 +6,18 @@ Hozirgi ustuvor yo'nalish: **UX/UI mantig'ini va sayt arxitekturasini profession
 - **Arizalarni qabul qilish.** Ariza modali (`handleFormSubmit`) hozir hech qayerga yubormaydi, faqat "qabul qilindi" ko'rsatadi. Kerak: server nuqtasi + yetkazish kanali (Telegram bot / pochta / CRM) + haqiqiy ariza raqami. Kanalni egasi tanlaydi.
 
 ## UX topilmalari (arxitektura sxemasidagi 7-bo'lim)
-1. [bajarildi] Mobilda natija (razmer, mato) va "Buyurtma" tugmasi 3D ostida qotirilgan panelda. Sahifa uzunligi hali qisqartirilmagan.
+1. [bajarildi] Mobilda natija (razmer, mato) va "Buyurtma" tugmasi 3D ostida qotirilgan panelda. Mobilda sahifa uzunligi: 14 019 px dan 10 242 px ga qisqardi (soha kartalari yon tomonga suriladigan lenta).
 2. [bajarildi] Mobilda 3D ko'rinish yuqorida qotadi, slayderlar ostida aylanadi.
 3. [bajarildi] Soha kartasi: "Narxni hisoblash" kalkulyatorning 3-tabiga sohani tanlab olib boradi; "Ariza qoldirish" ikkinchi havola. Qo'shimcha: mobilda 3-tab ustunlari tuzatildi.
 4. [bajarildi] Kalkulyator: "Qadam 1/3" paneli, "Keyingi qadam" / "Orqaga" tugmalari, tab uchun ARIA rollari.
 5. [qisman] Mavjud bo'lmagan `/ru/` ga ko'rsatuvchi `hreflang="ru"` olib tashlandi. Haqiqiy `/ru/` sahifasi hali yo'q (rus tili modal oyna).
 6. [bajarildi] Sensorli ekranlarda bosish maydonlari 40–44 px, barcha slayder va raqam maydonlariga `aria-label`.
 7. [bajarildi] Rasmlar WebP (480/800/to'liq) + `srcset`/`sizes` + `width/height`; lightbox to'liq WebP ni ochadi. Asl JPG fayllar zaxira sifatida qoldi (`images/opt/` yangi).
-8. Narxlarni koddan alohida sozlamaga chiqarish.
+8. [bajarildi] Narxlar va chegirmalar `js/pricing-config.js` ga ko'chirildi (faqat shu faylni tahrirlash kifoya).
 
 ## Boshqa
 - Boshqa formalar uchun haqiqiy maneken fotolari (`docs/MODEL-PHOTOS.md`).
 - Serverda avtomatik yangilash (push dan keyin).
 
 ## Eslatma
-- Footerdagi "Maxfiylik siyosati" havolasi hozir `alert()` ko'rsatadi (vaqtinchalik matn). Haqiqiy sahifa yoki bo'lim kerak.
+- "Maxfiylik siyosati" endi modal oyna (qisqa matn, mavjud bayonotga asoslangan). To'liq yuridik matnni egasi tasdiqlashi kerak.

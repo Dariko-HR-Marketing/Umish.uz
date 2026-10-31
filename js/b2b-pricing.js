@@ -5,49 +5,26 @@ function updateCalc() {
   const qtyVal = document.getElementById('calcQtyVal');
   if (qtyVal) qtyVal.textContent = qty + ' dona';
 
-  // Base price table
-  let basePrice = 240000;
-  if (sector === 'harbiy') basePrice = 420000;
-  else if (sector === 'iiv') basePrice = 380000;
-  else if (sector === 'sanoat') basePrice = 250000;
-  else if (sector === 'tibbiyot') basePrice = 195000;
-  else if (sector === 'horeca') basePrice = 220000;
-  else if (sector === 'korporativ') basePrice = 180000;
+  const P = UMISH_PRICING;
 
-  if (item === 'full') basePrice += 90000;
-  else if (item === 'kombinezon') basePrice += 40000;
-  else if (item === 'polo') basePrice = 160000;
+  // Bazaviy narx: soha + komplekt turi + opsiyalar
+  let basePrice = P.base[sector] ?? P.defaultBase;
+  const it = P.items[item];
+  if (it) basePrice = it.fixed !== undefined ? it.fixed : basePrice + (it.add || 0);
+  Object.keys(P.options).forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.checked) basePrice += P.options[id];
+  });
 
-  // Options
-  if (document.getElementById('calcOptEmbroidery').checked) basePrice += 20000;
-  if (document.getElementById('calcOptReflect').checked) basePrice += 15000;
-  if (document.getElementById('calcOptFireproof').checked) basePrice += 35000;
-
-  // Discount tier
-  let discountPct = 0;
-  let discountLabel = "Chakana / O'rta partiya";
-  if (qty >= 500) {
-    discountPct = 0.18;
-    discountLabel = "-18% (Katta zavod partiyasi)";
-  } else if (qty >= 200) {
-    discountPct = 0.14;
-    discountLabel = "-14% (Katta korxona partiyasi)";
-  } else if (qty >= 50) {
-    discountPct = 0.10;
-    discountLabel = "-10% (Ulgurji narx)";
-  }
+  // Miqdor bo'yicha chegirma
+  const tier = P.tiers.find(t => qty >= t.min);
+  const discountPct = tier ? tier.pct : 0;
+  const discountLabel = tier ? tier.label : P.defaultTierLabel;
 
   const discountedUnit = Math.round(basePrice * (1 - discountPct));
   const total = discountedUnit * qty;
 
-  const sectorNames = {
-    harbiy: "Harbiy & Maxsus",
-    iiv: "IIV & Xavfsizlik",
-    sanoat: "Sanoat & Spetsodejda",
-    tibbiyot: "Tibbiyot & Klinika",
-    horeca: "HoReCa & Restoran",
-    korporativ: "Korporativ & Ofis"
-  };
+  const sectorNames = P.sectorNames;
 
   document.getElementById('resSector').textContent = sectorNames[sector] || sector;
   document.getElementById('resQty').textContent = qty + ' dona';
