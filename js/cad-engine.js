@@ -45,7 +45,7 @@ function switchCalcTab(tabId) {
     const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
     const panel = document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1));
     if (btn) btn.classList.toggle('is-active', t === tabId);
-    if (panel) panel.style.display = (t === tabId) ? ((t === 'tailor') ? 'grid' : 'flex') : 'none';
+    if (panel) panel.style.display = (t === tabId) ? (t === 'tailor' ? 'grid' : t === 'budget' ? '' : 'flex') : 'none';
   });
   if (tabId === 'tailor') updateTailorCad();
   if (tabId === 'batch') renderBatchTable();
@@ -209,6 +209,11 @@ function updateTailorCad() {
 
   const resLiningTotal = document.getElementById('resLiningTotal');
   if (resLiningTotal) resLiningTotal.textContent = (calc.size >= 56 ? '2.00' : '1.80') + ' metr';
+
+  const qSize = document.getElementById('qSize');
+  if (qSize) qSize.textContent = `${calc.size} / ${calc.rost}`;
+  const qFab = document.getElementById('qFab');
+  if (qFab) qFab.textContent = `${calc.fabricMeter} m`;
 
   // Tanlangan mato nomi va rangi
   const fb = cadFabric(cadState.fabric);

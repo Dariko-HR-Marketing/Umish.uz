@@ -6,9 +6,9 @@ Hozirgi ustuvor yo'nalish: **UX/UI mantig'ini va sayt arxitekturasini profession
 - **Arizalarni qabul qilish.** Ariza modali (`handleFormSubmit`) hozir hech qayerga yubormaydi, faqat "qabul qilindi" ko'rsatadi. Kerak: server nuqtasi + yetkazish kanali (Telegram bot / pochta / CRM) + haqiqiy ariza raqami. Kanalni egasi tanlaydi.
 
 ## UX topilmalari (arxitektura sxemasidagi 7-bo'lim)
-1. Mobilda sahifa juda uzun; natija va "Ariza" tugmasi qotirilgan panelga.
-2. Mobilda 3D ko'rinish slayderlardan keyin; 3D ni yuqorida qotirish.
-3. Soha kartasidan kalkulyatorga o'tishda sohani oldindan tanlash.
+1. [bajarildi] Mobilda natija (razmer, mato) va "Buyurtma" tugmasi 3D ostida qotirilgan panelda. Sahifa uzunligi hali qisqartirilmagan.
+2. [bajarildi] Mobilda 3D ko'rinish yuqorida qotadi, slayderlar ostida aylanadi.
+3. [bajarildi] Soha kartasi: "Narxni hisoblash" kalkulyatorning 3-tabiga sohani tanlab olib boradi; "Ariza qoldirish" ikkinchi havola. Qo'shimcha: mobilda 3-tab ustunlari tuzatildi.
 4. Kalkulyator tablari uchun qadam ko'rsatkichi (1 → 2 → 3).
 5. Haqiqiy `/ru/` sahifasi yoki `hreflang="ru"` ni olib tashlash.
 6. Bosish maydonlari ≥ 44 px, raqam maydonlariga `aria-label`.

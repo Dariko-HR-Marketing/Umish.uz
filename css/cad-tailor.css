@@ -189,3 +189,28 @@
 .cad3d-guides { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 @media (max-width: 540px) { .cad3d-host { height: 440px; } }
 .cad-view-tools { flex-wrap: wrap; }
+
+/* Natijaga o'tganda qisqa urg'u */
+@keyframes calcFlash { 0% { box-shadow: 0 0 0 0 rgba(23, 115, 214, .7); } 100% { box-shadow: 0 0 0 16px rgba(23, 115, 214, 0); } }
+.calc-total.is-flash { animation: calcFlash .9s ease-out 2; border-radius: var(--r); }
+@media (prefers-reduced-motion: reduce) { .calc-total.is-flash { animation: none; } }
+
+/* Mobil: 3D ko'rinish yuqorida qotadi, slayderlar uning ostida aylanadi */
+.cad-quick { display: none; }
+@media (max-width: 768px) {
+  .cad-col-viewport { order: -1; position: sticky; top: calc(var(--hdr-h, 62px) + 6px); z-index: 20; padding: .6rem; gap: .5rem; }
+  .cad-view-title, .cad-foot { display: none !important; }
+  .cad-view-bar { padding-bottom: .45rem; }
+  .cad-vbtn { padding: .22rem .5rem; font-size: .7rem; }
+  .cad-canvas-wrap { min-height: 0; }
+  .cad3d-host { height: clamp(230px, 32vh, 330px); }
+  .cad-canvas-wrap svg { max-height: 32vh; }
+  .cad-quick {
+    display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap;
+    color: #CBD5E1; font-size: .78rem; border-top: 1px solid rgba(255, 255, 255, .1); padding-top: .5rem;
+  }
+  .cad-quick b { color: #fff; font-family: var(--f-mono); }
+  .cad-quick .btn { margin-left: auto; }
+}
+@media (min-width: 541px) and (max-width: 768px) { :root { --hdr-h: 72px; } }
+@media (max-width: 380px) { :root { --hdr-h: 56px; } }
