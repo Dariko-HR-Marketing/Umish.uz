@@ -163,7 +163,7 @@ function openLightboxCurrent(btn) {
   const badge = activeSlide.querySelector('.svc-slide-badge');
   const title = badge ? badge.textContent.trim() : (img ? img.alt : "Uniforma");
   if (img) {
-    openLightbox(img.src, title);
+    openLightbox(img.dataset.full || img.currentSrc || img.src, title);
   }
 }
 

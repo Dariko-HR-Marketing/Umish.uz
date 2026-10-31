@@ -12,7 +12,7 @@ Hozirgi ustuvor yo'nalish: **UX/UI mantig'ini va sayt arxitekturasini profession
 4. [bajarildi] Kalkulyator: "Qadam 1/3" paneli, "Keyingi qadam" / "Orqaga" tugmalari, tab uchun ARIA rollari.
 5. [qisman] Mavjud bo'lmagan `/ru/` ga ko'rsatuvchi `hreflang="ru"` olib tashlandi. Haqiqiy `/ru/` sahifasi hali yo'q (rus tili modal oyna).
 6. [bajarildi] Sensorli ekranlarda bosish maydonlari 40–44 px, barcha slayder va raqam maydonlariga `aria-label`.
-7. Rasmlarni WebP/`srcset` ga o'tkazish, `width/height` berish.
+7. [bajarildi] Rasmlar WebP (480/800/to'liq) + `srcset`/`sizes` + `width/height`; lightbox to'liq WebP ni ochadi. Asl JPG fayllar zaxira sifatida qoldi (`images/opt/` yangi).
 8. Narxlarni koddan alohida sozlamaga chiqarish.
 
 ## Boshqa
