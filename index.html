@@ -273,6 +273,7 @@
   </div>
 
   <div class="wrap">
+    <p class="svc-hint" aria-hidden="true">6 ta soha: yon tomonga suring →</p>
     <div class="svc-grid">
       
       <!-- Soha 1: Harbiy va Maxsus -->
@@ -1531,7 +1532,7 @@
 
   <div class="wrap foot-btm">
     <span>© <span id="yr">2026</span> UMISH Professional Uniforms. Barcha huquqlar himoyalangan.</span>
-    <a href="#maxfiylik" onclick="alert('Maxfiylik siyosati: Shaxsiy ma\'lumotlaringiz faqat buyurtma rasmiylashtirish va aloqa uchun foydalaniladi.'); return false;">Maxfiylik siyosati</a>
+    <a href="#maxfiylik" onclick="document.getElementById('privacyModal').showModal(); return false;">Maxfiylik siyosati</a>
     <a href="#ru" onclick="toggleLanguage('ru'); return false;">Русская версия</a>
     <span class="end">umish.uz</span>
   </div>
@@ -1670,6 +1671,21 @@
   </div>
 </dialog>
 
+<!-- Maxfiylik siyosati -->
+<dialog class="modal" id="privacyModal" aria-labelledby="privacyTitle">
+  <div class="modal-in">
+    <button type="button" class="modal-x" aria-label="Yopish" onclick="document.getElementById('privacyModal').close()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 5 14 14M19 5 5 19"/></svg>
+    </button>
+    <div class="formcard">
+      <h3 id="privacyTitle">Maxfiylik siyosati</h3>
+      <p>Shaxsiy ma'lumotlaringiz (ism, telefon raqam va izoh) faqat buyurtmani rasmiylashtirish va siz bilan bog'lanish uchun foydalaniladi.</p>
+      <p>Ma'lumotlaringiz bo'yicha savol bo'lsa, <a href="mailto:info@umish.uz">info@umish.uz</a> manziliga yozing.</p>
+      <button type="button" class="btn btn--blue btn--full" onclick="document.getElementById('privacyModal').close()">Tushunarli</button>
+    </div>
+  </div>
+</dialog>
+
 <!-- Russian B2B Information Modal -->
 <dialog class="modal" id="ruModal" style="max-width: 820px; padding: 0; background: transparent; border: 0;">
   <div style="position: relative; background: #081B2E; border: 1px solid rgba(56, 189, 248, .35); border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8);">
@@ -1761,6 +1777,7 @@
 <script src="js/cad-render.js"></script>
 <script src="js/cad-photo.js"></script>
 <script src="js/batch-vedomost.js"></script>
+<script src="js/pricing-config.js"></script>
 <script src="js/b2b-pricing.js"></script>
 </body>
 </html>

@@ -1114,3 +1114,16 @@ dl { margin: 0; }
   .calc-check { min-height: 44px; display: flex; align-items: center; gap: .6rem; }
   .calc-check input[type="checkbox"] { width: 22px; height: 22px; flex: 0 0 22px; accent-color: var(--blue); }
 }
+
+/* Mobil: soha kartalari yon tomonga suriladigan lenta (sahifa ~3500 px qisqaradi) */
+.svc-hint { display: none; }
+@media (max-width: 640px) {
+  .svc-hint { display: block; margin: 0 0 .6rem; font: 600 .78rem var(--f-mono); color: var(--mute); }
+  .svc-grid {
+    display: flex; gap: .9rem; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; padding-bottom: 1rem;
+  }
+  .svc { flex: 0 0 86%; scroll-snap-align: start; }
+  .svc.rv { opacity: 1; transform: none; }
+  .svc-art-wrap { aspect-ratio: 4 / 3; min-height: 0; }
+}

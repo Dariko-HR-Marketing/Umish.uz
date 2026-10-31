@@ -14,7 +14,8 @@
 - `js/cad-3d.js` — 3D parametrik maneken va forma (three.js, `js/vendor/`); o'lchamlardan geometriya quriladi, mato teksturasi canvas'da chiziladi; kalkulyatorga yaqinlashganda lazy yuklanadi (ES modul, serverdan ochish kerak, `file://` da ishlamaydi)
 - `js/cad-photo.js` — foto rejim: `images/models/` dagi model suratlari ustiga o'lchovlar, kalibrovka (`?calibrate`); qo'llanma `docs/MODEL-PHOTOS.md`
 - `js/batch-vedomost.js` — xodimlar jadvali, CSV eksport, A4 print, buyurtma
-- `js/b2b-pricing.js` — partiya narxi (`updateCalc`) va dastlabki ishga tushirish
+- `js/pricing-config.js` — narxlar va chegirmalar (`UMISH_PRICING`): narxni o'zgartirish uchun faqat shu fayl
+- `js/b2b-pricing.js` — partiya narxi hisobi (`updateCalc`) va dastlabki ishga tushirish
 - Skriptlar klassik (modulsiz) va `index.html` oxirida shu tartibda ulanadi; `onclick` ishlatadigan funksiyalar global bo'lib qolishi shart.
 
 ## Qoidalar
