@@ -1091,3 +1091,11 @@ dl { margin: 0; }
 .rv { opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .45s ease; }
 .rv.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } }
+
+/* Soha kartasi: asosiy tugma (hisob-kitob) + ikkinchi darajali havola (ariza) */
+.svc-cta-row { display: grid; gap: .55rem; }
+.svc-link {
+  background: none; border: 0; padding: .35rem .2rem; cursor: pointer; justify-self: start;
+  font: 700 .84rem var(--f-body); color: var(--blue); text-decoration: underline; text-underline-offset: 3px;
+}
+.svc-link:hover { color: var(--blue-hi); }

@@ -69,6 +69,21 @@ function submitCalcOrder() {
   if (modal) modal.showModal();
 }
 
+// Soha kartasidan kalkulyatorga o'tish: soha oldindan tanlanadi, 3-tab (narx) ochiladi
+function goToCalc(sector) {
+  const sel = document.getElementById('calcSector');
+  if (sel && sector) sel.value = sector;
+  updateCalc();
+  switchCalcTab('budget');
+  const target = document.getElementById('kalkulyator');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const res = document.getElementById('resTotal');
+  if (res) {
+    const card = res.closest('.calc-total') || res.parentElement;
+    card.classList.remove('is-flash'); void card.offsetWidth; card.classList.add('is-flash');
+  }
+}
+
 // Initial calculation on load
 updateCalc();
 // Initial CAD and Batch load
