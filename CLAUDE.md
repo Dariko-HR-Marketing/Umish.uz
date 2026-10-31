@@ -10,7 +10,8 @@
 - `css/style.css` — asosiy dizayn va responsive; `css/cad-tailor.css` — CAD kalkulyator, vedomost, print
 - `js/app.js` — modal, menyu, karusel, chat, forma, til almashtirish
 - `js/cad-engine.js` — `cadState`, GOST hisobi (`calculateGost`), slayderlar
-- `js/cad-render.js` — realistik odam silueti (`renderCadSvg`), mato ro'yxati `CAD_FABRICS` va mato tanlash
+- `js/cad-render.js` — SVG chizma rejimi (`renderCadSvg`, zaxira), mato ro'yxati `CAD_FABRICS` va mato tanlash
+- `js/cad-3d.js` — 3D parametrik maneken va forma (three.js, `js/vendor/`); o'lchamlardan geometriya quriladi, mato teksturasi canvas'da chiziladi; kalkulyatorga yaqinlashganda lazy yuklanadi (ES modul, serverdan ochish kerak, `file://` da ishlamaydi)
 - `js/cad-photo.js` — foto rejim: `images/models/` dagi model suratlari ustiga o'lchovlar, kalibrovka (`?calibrate`); qo'llanma `docs/MODEL-PHOTOS.md`
 - `js/batch-vedomost.js` — xodimlar jadvali, CSV eksport, A4 print, buyurtma
 - `js/b2b-pricing.js` — partiya narxi (`updateCalc`) va dastlabki ishga tushirish

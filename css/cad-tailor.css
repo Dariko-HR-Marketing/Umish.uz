@@ -176,3 +176,16 @@
 .cad-photo-note { font-size: .72rem; color: #94A3B8; line-height: 1.4; }
 .cad-calib-box { font-size: .78rem; color: #E2E8F0; background: rgba(56, 189, 248, .12); border: 1px solid rgba(56, 189, 248, .4); border-radius: 6px; padding: .5rem .7rem; }
 .cad-calib-box code { color: #38BDF8; }
+
+/* 3D maneken */
+.cad3d-host {
+  position: relative; width: 100%; height: clamp(420px, 62vh, 620px); border-radius: 10px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 38%, #f4f7fa 0%, #cfd8e2 68%, #b6c2d0 100%);
+  box-shadow: inset 0 0 0 1px rgba(11, 34, 56, .15);
+}
+.cad3d-canvas { position: absolute; inset: 0; }
+.cad3d-canvas canvas { display: block; touch-action: pan-y; cursor: grab; }
+.cad3d-canvas canvas:active { cursor: grabbing; }
+.cad3d-guides { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+@media (max-width: 540px) { .cad3d-host { height: 440px; } }
+.cad-view-tools { flex-wrap: wrap; }

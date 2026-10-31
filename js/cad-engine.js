@@ -123,6 +123,7 @@ function setCadView(v) {
   cadState.view = v;
   document.getElementById('vbtnFront').classList.toggle('is-active', v === 'front');
   document.getElementById('vbtnBack').classList.toggle('is-active', v === 'back');
+  if (cadState.mode === '3d' && window.cad3d) window.cad3d.setView(v);
   updateTailorCad();
 }
 

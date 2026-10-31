@@ -9,15 +9,14 @@ const CAD_PHOTO_REF = { height: 176, chest: 104, waist: 92, hips: 102, shoulder:
 // Har bir rasm uchun ixtiyoriy sozlamalar: top, floor, cx (rasm balandligi/kengligiga nisbatan 0..1)
 // va lm (kalibrovka natijasi: nuqtalar [x, y] nisbatlarda). Kalibrovka: sahifa manzili oxiriga ?calibrate qo'shing.
 const CAD_PHOTOS = {
-  // Haqiqiy maneken fotosi (kalibrovka qilingan). Orqa tomon fotosi bo'lmasa, chizma rejimi ko'rsatiladi.
-  iiv_patrol:     { front: { src: 'images/iiv_patrol_suit_png_1791916033242.jpg', top: 0.046, floor: 0.956, cx: 0.4997,
-                             lm: { shoulderL: [0.3109, 0.2019], shoulderR: [0.6885, 0.2019], chestL: [0.3878, 0.3056], chestR: [0.6116, 0.3056],
-                                   waistL: [0.4003, 0.428], waistR: [0.5997, 0.428], wristR: [0.6823, 0.507], hem: [0.5, 0.4565], trHem: [0.5, 0.926] } },
-                    back: { src: 'images/models/iiv_patrol_back.jpg' } },
-  harbiy_dala:    { front: { src: 'images/models/harbiy_dala_front.jpg' },    back: { src: 'images/models/harbiy_dala_back.jpg' } },
-  sanoat_pro:     { front: { src: 'images/models/sanoat_pro_front.jpg' },     back: { src: 'images/models/sanoat_pro_back.jpg' } },
-  ofis_kostyum:   { front: { src: 'images/models/ofis_kostyum_front.jpg' },   back: { src: 'images/models/ofis_kostyum_back.jpg' } },
-  tibbiyot_xalat: { front: { src: 'images/models/tibbiyot_xalat_front.jpg' }, back: { src: 'images/models/tibbiyot_xalat_back.jpg' } }
+  // Faqat mavjud fotolar yoziladi (yo'q fayl so'ralmasligi uchun). Yangi foto qo'shish: docs/MODEL-PHOTOS.md
+  iiv_patrol: {
+    front: {
+      src: 'images/iiv_patrol_suit_png_1791916033242.jpg', top: 0.046, floor: 0.956, cx: 0.4997,
+      lm: { shoulderL: [0.3109, 0.2019], shoulderR: [0.6885, 0.2019], chestL: [0.3878, 0.3056], chestR: [0.6116, 0.3056],
+            waistL: [0.4003, 0.428], waistR: [0.5997, 0.428], wristR: [0.6823, 0.507], hem: [0.5, 0.4565], trHem: [0.5, 0.926] }
+    }
+  }
 };
 
 // Standart kadrlash: bosh tepasi rasmning 5% da, poyabzal tagi 96% da, odam o'rtada
@@ -55,12 +54,16 @@ function cadPhotoEntry(type, view) {
 }
 
 function cadPhotoSyncUi(available, active) {
+  const m = cadState.mode;
+  [['vbtn3d', '3d'], ['vbtnDraw', 'draw'], ['vbtnMode', 'photo']].forEach(([id, mode]) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('is-active', m === mode);
+  });
   const btn = document.getElementById('vbtnMode');
   if (btn) {
-    btn.classList.toggle('is-active', active);
     btn.disabled = !available;
     btn.style.opacity = available ? '' : '.45';
-    btn.title = available ? "Foto va chizma rejimini almashtirish" : "Bu forma uchun model fotosi hali yuklanmagan";
+    btn.title = available ? "Namuna fotosi" : "Bu forma uchun maneken fotosi hali yuklanmagan";
   }
   const note = document.getElementById('cadPhotoNote');
   if (note) note.style.display = active ? 'block' : 'none';
@@ -68,15 +71,42 @@ function cadPhotoSyncUi(available, active) {
   if (cal) cal.style.display = /[?&]calibrate/.test(location.search) ? '' : 'none';
 }
 
-function toggleCadMode() {
-  cadState.mode = cadState.mode === 'photo' ? 'draw' : 'photo';
+function setCadMode(mode) {
+  cadState.mode = mode;
   updateTailorCad();
+}
+function toggleCadMode() { setCadMode(cadState.mode === 'photo' ? 'draw' : 'photo'); }
+
+// ---------------- 3D rejim (kerak bo'lganda yuklanadi)
+let cad3dState = 'idle', cad3dWanted = false;
+function cad3dShow(on) {
+  const h = document.getElementById('cad3dHost'), sv = document.getElementById('cadSvg');
+  if (h) h.style.display = on ? 'block' : 'none';
+  if (sv) sv.style.display = on ? 'none' : '';
+}
+function cad3dSupported() {
+  try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; }
+}
+function cad3dLoad() {
+  if (cad3dState !== 'idle') return;
+  cad3dState = 'loading';
+  if (!cad3dSupported()) { cad3dState = 'failed'; cadState.mode = 'draw'; updateTailorCad(); return; }
+  import('./cad-3d.js').then(() => { cad3dState = 'ready'; updateTailorCad(); })
+    .catch(err => { console.warn('3D yuklanmadi', err); cad3dState = 'failed'; cadState.mode = 'draw'; updateTailorCad(); });
 }
 
 function renderCadPhoto(svg) {
   const s = cadState;
   const e = cadPhotoEntry(s.uniformType, s.view);
   const active = s.mode === 'photo' && !!e;
+  if (s.mode === '3d') {
+    cadPhotoSyncUi(!!e, false);
+    if (cad3dState === 'ready' && window.cad3d) { cad3dShow(true); window.cad3d.update(); return true; }
+    if (cad3dWanted) cad3dLoad();
+    cad3dShow(false);              // yuklanguncha chizma ko'rsatiladi
+    return false;
+  }
+  cad3dShow(false);
   cadPhotoSyncUi(!!e, active);
   if (!active) return false;
 
@@ -100,8 +130,8 @@ function renderCadPhoto(svg) {
   Object.keys(e.lm || {}).forEach(k => { lm[k] = [e.lm[k][0] * w, e.lm[k][1] * h]; });
 
   // Foto o'lchamga qarab moslashadi (pol chizig'i va o'rta chiziq atrofida)
-  const sy = calib ? 1 : s.height / ref.height;
-  const sx = calib ? 1 : Math.sqrt(sy) * (s.chest / ref.chest * 0.6 + s.waist / ref.waist * 0.4);
+  // Foto namuna sifatida o'zgarmas ko'rsatiladi (cho'zilmaydi); jonli o'lchamlar uchun 3D rejim
+  const sy = 1, sx = 1;
   const T = p => [cx + (p[0] - cx) * sx, floorPx + (p[1] - floorPx) * sy];
 
   const u = 1.6 * w / 500;               // chizma rejimidagi 10px shrift bilan teng birlik
@@ -147,26 +177,26 @@ function renderCadPhoto(svg) {
     // Yelka
     const ys = Math.min(shL[1], shR[1]) - 12 * u;
     g += arrow([shL[0], ys], [shR[0], ys]) + leader([shL[0], ys - 4 * u], shL) + leader([shR[0], ys - 4 * u], shR)
-      + box(shL[0] - 62 * u, ys, `↔ Yelka: ${s.shoulder}sm`);
+      + box(shL[0] - 62 * u, ys, `↔ Yelka: ${ref.shoulder}sm`);
     // Ko'krak, bel, son
-    g += arrow(chL, chR) + box(midX, chL[1] - 14 * u, `↔ Ko'krak: ${s.chest}sm`);
-    g += arrow(waL, waR) + box(midX, waL[1] + 14 * u, `↔ Bel: ${s.waist}sm`);
-    g += arrow([midX - hipHalf, hipP[1]], [midX + hipHalf, hipP[1]]) + box(midX, hipP[1] + 14 * u, `↔ Son: ${s.hips}sm`);
+    g += arrow(chL, chR) + box(midX, chL[1] - 14 * u, `↔ Ko'krak: ${ref.chest}sm`);
+    g += arrow(waL, waR) + box(midX, waL[1] + 14 * u, `↔ Bel: ${ref.waist}sm`);
+    g += arrow([midX - hipHalf, hipP[1]], [midX + hipHalf, hipP[1]]) + box(midX, hipP[1] + 14 * u, `↔ Son: ${ref.hips}sm`);
     // Yeng
     g += arrow([shR[0] + 30 * u, shR[1]], [wr[0] + 30 * u, wr[1]]) + leader(shR, [shR[0] + 30 * u, shR[1]])
-      + box((shR[0] + wr[0]) / 2 + 74 * u, (shR[1] + wr[1]) / 2, `↕ Yeng: ${s.sleeve}sm`);
+      + box((shR[0] + wr[0]) / 2 + 74 * u, (shR[1] + wr[1]) / 2, `↕ Yeng: ${ref.sleeve}sm`);
     // Kurtka uzunligi (chap tomonda)
     const xj = shL[0] - 38 * u;
-    g += arrow([xj, neckP[1]], [xj, hem[1]]) + box(xj - 56 * u, (neckP[1] + hem[1]) / 2, `↕ Kurtka: ${s.jacketLen}sm`);
+    g += arrow([xj, neckP[1]], [xj, hem[1]]) + box(xj - 56 * u, (neckP[1] + hem[1]) / 2, `↕ Kurtka: ${ref.jacketLen}sm`);
     // Shim uzunligi (o'ng tomonda)
     const xt = midX + hipHalf + 26 * u;
-    g += arrow([xt, waR[1]], [xt, trh[1]]) + box(xt + 56 * u, (hipP[1] + trh[1]) / 2, `↕ Shim: ${s.trouserLen}sm`);
+    g += arrow([xt, waR[1]], [xt, trh[1]]) + box(xt + 56 * u, (hipP[1] + trh[1]) / 2, `↕ Shim: ${ref.trouserLen}sm`);
     // Bilak va tizza
     const kneeP = T([cx, Y(0.286)]);
-    g += box(wr[0] + 70 * u, wr[1] + 18 * u, `○ Bilak: ${s.wrist}sm`) + box(kneeP[0] - hipHalf - 60 * u, kneeP[1], `○ Tizza: ${s.knee}sm`);
+    g += box(wr[0] + 70 * u, wr[1] + 18 * u, `○ Bilak: ${ref.wrist}sm`) + box(kneeP[0] - hipHalf - 60 * u, kneeP[1], `○ Tizza: ${ref.knee}sm`);
     // Bo'yin va bosh
-    g += leader([neckP[0] + 14 * u, neckP[1]], [neckP[0] + 60 * u, neckP[1] - 24 * u]) + box(neckP[0] + 112 * u, neckP[1] - 24 * u, `Bo'yin: ${s.neck}sm`);
-    g += leader([head[0] + 26 * u, head[1] + 30 * u], [head[0] + 70 * u, head[1] + 12 * u]) + box(head[0] + 124 * u, head[1] + 12 * u, `Bosh: ${s.head}sm`);
+    g += leader([neckP[0] + 14 * u, neckP[1]], [neckP[0] + 60 * u, neckP[1] - 24 * u]) + box(neckP[0] + 112 * u, neckP[1] - 24 * u, `Bo'yin: ${ref.neck}sm`);
+    g += leader([head[0] + 26 * u, head[1] + 30 * u], [head[0] + 70 * u, head[1] + 12 * u]) + box(head[0] + 124 * u, head[1] + 12 * u, `Bosh: ${ref.head}sm`);
     g += `</g>`;
     // Bo'y
     const xr = -0.2 * w;
@@ -174,7 +204,7 @@ function renderCadPhoto(svg) {
       <line x1="${r(xr)}" y1="${r(head[1])}" x2="${r(xr)}" y2="${r(floorP[1])}" stroke="#10B981" stroke-width="${sw}" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
       <line x1="${r(xr - 6 * u)}" y1="${r(head[1])}" x2="${r(xr + 6 * u)}" y2="${r(head[1])}" stroke="#10B981" stroke-width="${sw}"/>
       <line x1="${r(xr - 6 * u)}" y1="${r(floorP[1])}" x2="${r(xr + 6 * u)}" y2="${r(floorP[1])}" stroke="#10B981" stroke-width="${sw}"/>
-      ${box(xr + 52 * u, (head[1] + floorP[1]) / 2, `↕ Bo'y: ${s.height}sm`, '#10B981')}
+      ${box(xr + 52 * u, (head[1] + floorP[1]) / 2, `↕ Bo'y: ${ref.height}sm`, '#10B981')}
     </g>`;
   }
   svg.innerHTML = g;
@@ -190,7 +220,7 @@ function cadPhotoSrc(s) {
 // ==========================================================================
 function cadCalibStart() {
   if (!cadPhotoEntry(cadState.uniformType, cadState.view)) return;
-  cadState.mode = 'photo';
+  cadState.mode = '3d';
   cadState.calib = { i: 0, pts: {} };
   const svg = document.getElementById('cadSvg');
   svg.style.cursor = 'crosshair';
@@ -233,4 +263,14 @@ function cadCalibFinish() {
   updateTailorCad();
 }
 
-cadState.mode = 'photo';
+cadState.mode = '3d';
+
+// 3D ni sahifa kalkulyatorga yaqinlashganda yuklash (boshlang'ich yuklashni og'irlashtirmaslik uchun)
+(function () {
+  const wrap = document.getElementById('cadCanvasWrap');
+  const go = () => { cad3dWanted = true; updateTailorCad(); };
+  if (wrap && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { io.disconnect(); go(); } }, { rootMargin: '600px' });
+    io.observe(wrap);
+  } else go();
+})();
