@@ -214,3 +214,25 @@
 }
 @media (min-width: 541px) and (max-width: 768px) { :root { --hdr-h: 72px; } }
 @media (max-width: 380px) { :root { --hdr-h: 56px; } }
+
+/* Bosish maydonlari */
+@media (pointer: coarse), (max-width: 768px) {
+  .cad-size-pill { min-height: 44px; min-width: 52px; }
+  .cad-sub-btn, .calc-tab-btn { min-height: 44px; }
+  .cad-slider-track input[type="number"] { min-height: 44px; min-width: 72px; }
+  .cad-swatch { width: 38px; height: 38px; position: relative; }
+  .cad-swatch::after { content: ""; position: absolute; inset: -3px; }
+  .cad-swatches { gap: .4rem; }
+  .cad-vbtn { min-height: 40px; }
+  .batch-row-btn { min-height: 40px; min-width: 44px; }
+}
+
+/* Qadamlar paneli: 1 → 2 → 3 */
+.calc-next {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem;
+  margin-top: 1rem; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper-2);
+}
+.calc-next-step { font-size: .84rem; color: var(--mute); }
+.calc-next-step b { color: var(--blue); font-family: var(--f-mono); }
+.calc-next-btns { display: flex; gap: .5rem; flex-wrap: wrap; margin-left: auto; }
+.calc-next-btns .btn { min-height: 44px; }

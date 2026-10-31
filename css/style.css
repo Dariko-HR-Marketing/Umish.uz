@@ -1099,3 +1099,18 @@ dl { margin: 0; }
   font: 700 .84rem var(--f-body); color: var(--blue); text-decoration: underline; text-underline-offset: 3px;
 }
 .svc-link:hover { color: var(--blue-hi); }
+
+/* Bosish maydonlari (sensorli ekranlar): kamida 40–44 px */
+@media (pointer: coarse), (max-width: 768px) {
+  .lang a, .lang span { min-width: 40px; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+  .tel-link { min-width: 40px; min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+  .burger { width: 44px; height: 44px; }
+  .svc-c-btn { width: 44px; height: 44px; }
+  .svc-c-zoom { width: 44px; height: 44px; }
+  .svc-c-dot { position: relative; }
+  .svc-c-dot::after { content: ""; position: absolute; inset: -16px -7px; }
+  .svc-link { min-height: 44px; padding-inline: .4rem; display: inline-flex; align-items: center; }
+  .tlink, .foot-frame a { min-height: 40px; display: inline-flex; align-items: center; }
+  .calc-check { min-height: 44px; display: flex; align-items: center; gap: .6rem; }
+  .calc-check input[type="checkbox"] { width: 22px; height: 22px; flex: 0 0 22px; accent-color: var(--blue); }
+}
