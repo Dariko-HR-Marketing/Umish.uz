@@ -31,3 +31,8 @@
 3. **Kod:** mavjud funksiyalarni o'chirma; kichik, aniq o'zgarish kirit; butun faylni qayta yozma.
 4. **Til:** barcha matn va xabarlar toza adabiy o'zbek tilida.
 5. Har o'zgarishdan keyin sahifani brauzerda ochib, konsolda xato yo'qligini tekshir.
+6. **Git tartibi:**
+   - `main` — barqaror, jonli saytga mos nusxa. Unga to'g'ridan-to'g'ri o'zgartirish kiritilmaydi.
+   - Har bir yangi mavzu (xato tuzatish, yangi imkoniyat, alohida masala) uchun `main` dan **alohida branch** ochiladi: `fix/<qisqa-nom>`, `feat/<qisqa-nom>`, `docs/<qisqa-nom>`, `chore/<qisqa-nom>`.
+   - O'zgarish branchda qilinadi, tekshiriladi (`node scripts/check.mjs`, brauzer), keyin Pull Request ochiladi.
+   - PR `main` ga faqat egasi tasdiqlagandan keyin birlashtiriladi. Bir branchga bir-biriga aloqasiz ishlar aralashtirilmaydi.
